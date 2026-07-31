@@ -60,9 +60,14 @@ O único ponto onde uma biblioteca resolve algo genuinamente difícil. Com SSR, 
 
 Configuração: `attribute="class"`, `defaultTheme="light"` (light é o padrão por 011), `enableSystem`, e `suppressHydrationWarning` no `<html>`.
 
-### Ícones: nenhuma biblioteca
+### Ícones
 
-O protótipo aprovado não usa ícone algum, e a página não precisa de nenhum. Se surgirem casos pontuais (seta de voltar, indicação de link externo), a decisão é **Phosphor com import individual por glifo**, nunca import do pacote inteiro. Não instalar antes de haver necessidade concreta.
+**Revisto em 31/07/2026**, quando a seção Stack foi adicionada ao protótipo (v7) e criou a necessidade concreta que este ticket dizia não existir.
+
+- **Logotipos de tecnologia: Simple Icons**, a fonte canônica de marcas. São cerca de quinze SVGs fixos e conhecidos, então **vendorizar os arquivos no repositório** (`public/icons/` ou import estático), sem depender de CDN em produção e sem instalar o pacote inteiro. O protótipo usa `cdn.simpleicons.org` apenas por conveniência local.
+- **Renderização monocromática obrigatória**: aplicar o SVG como `mask-image` com `background-color: currentColor`. O ícone herda a cor do texto, funciona nos dois temas sem variante e **nenhuma cor de marca entra na página**, preservando a decisão de 011 de não haver acento cromático. Usar o SVG como `<img>` traria a cor da marca e quebraria isso.
+- **Playwright não existe no Simple Icons** (verificado, 404). Fica fora do conjunto de ícones e é citado apenas em texto.
+- **Ícones de interface** (seta, link externo): continua valendo não instalar biblioteca. Se surgirem, Phosphor com import individual por glifo.
 
 ### Testes: nenhuma suíte
 

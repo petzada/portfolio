@@ -40,7 +40,16 @@ Consultar a skill `design-taste-frontend`. Salvar em `wayfinder/assets/` e apont
 
 ## Resolution
 
-**Referência aprovada: [`wayfinder/assets/008-prototipo-v6.html`](../assets/008-prototipo-v6.html).** Seis iterações; as anteriores (`v1` a `v5`) ficam no diretório como registro do caminho, mas apenas a v6 vale.
+**Referência aprovada: [`wayfinder/assets/008-prototipo-v7.html`](../assets/008-prototipo-v7.html).** As anteriores (`v1` a `v6`) ficam no diretório como registro do caminho, mas apenas a v7 vale.
+
+**Atualização de 31/07/2026 (v7)**, depois que a leitura dos repositórios mostrou que a engenharia real dos projetos era mais forte do que a página comunicava:
+
+- **Nova seção `Stack`, logo abaixo do hero**, em três grupos (Interface, Servidor e dados, Qualidade e infraestrutura), com logotipos de tecnologia em Simple Icons renderizados por `mask-image` com `currentColor`. A decisão de ícones de 012 foi revista por causa disso.
+- **Os chips de skill saíram do "Sobre mim"**, absorvidos pela nova seção.
+- **"Sobre mim" reescrito** para nomear a engenharia que não aparece na tela: webhook de pagamento assinado no Ceremony, isolamento multi-inquilino no Evoluteam, gatilhos no Postgres garantindo consistência de saldo no Silcon, testes de unidade a ponta a ponta e verificação contra produção. Antes a seção falava de capacidade em abstrato; agora ela cita fato verificável.
+- **Python saiu de vez.** A leitura dos repositórios confirmou que não é usado em nenhum dos três.
+
+Ordem final da página: `Hero` → `Stack` → `Projetos` → `Sobre mim` → `Trajetória` → `Formação` → `CTA`.
 
 O ticket foi aberto para testar hero e card. Acabou fixando o **one-pager inteiro**, por pedido do autor durante a sessão.
 
