@@ -67,7 +67,11 @@ A pendência de criar a conta Business está **resolvida**. Segue valendo que o 
 
 **Rótulo único: "Pedir um orçamento"**, idêntico em todos os lugares. Um rótulo por intenção; variar o texto entre o topo e o rodapé dilui os dois.
 
-Aparece em três pontos: pills do hero, banner de fechamento do one-pager, e fim de cada página de case (definido em 003). Sem CTA fixo flutuante no mobile.
+~~Aparece em três pontos: pills do hero, banner de fechamento do one-pager, e fim de cada página de case.~~
+
+**Revisto em 31/07/2026, na v8 do protótipo.** O autor removeu o banner de fechamento do one-pager, que passa a terminar em footer com links úteis. Restam **dois pontos**: a pill do hero e o fim de cada página de case (003). No one-pager, o caminho de conversão vira o link de WhatsApp no rodapé.
+
+Isso contraria o argumento original deste ticket, de que quem termina de ler é o lead mais quente da página e não se deve encerrar sem chamada. A decisão é do autor e está registrada como risco aceito em 008. Sem CTA fixo flutuante no mobile.
 
 Sem acento cromático, a ênfase vem do preenchimento sólido em `ink` sobre canvas claro, decidido em 008.
 

@@ -40,7 +40,15 @@ Consultar a skill `design-taste-frontend`. Salvar em `wayfinder/assets/` e apont
 
 ## Resolution
 
-**Referência aprovada: [`wayfinder/assets/008-prototipo-v7.html`](../assets/008-prototipo-v7.html).** As anteriores (`v1` a `v6`) ficam no diretório como registro do caminho, mas apenas a v7 vale.
+**Referência aprovada: [`wayfinder/assets/008-prototipo-v8.html`](../assets/008-prototipo-v8.html).** As anteriores (`v1` a `v7`) ficam no diretório como registro do caminho, mas apenas a v8 vale.
+
+**Atualização de 31/07/2026 (v8):**
+
+- **Stack virou carrossel horizontal automático de uma linha e desceu para depois dos projetos.** Marquee único da página. A faixa é duplicada e transladada até `-50%`, o que fecha o laço sem salto visível; a cópia leva `aria-hidden` para não duplicar na leitura assistiva. Pausa no hover, e sob `prefers-reduced-motion` a animação para de vez e a faixa vira scroll manual.
+- **CTA final removido.** A página termina em footer com links úteis: WhatsApp, LinkedIn, GitHub, e-mail e currículo. Custo registrado abaixo.
+- **Header sem a frase de pitch.** "Transformo problema de negócio em software que funciona" saiu, e "Desenvolvedor full stack" herdou o peso tipográfico que era dela (22px, cor `ink`).
+
+Ordem final: `Hero` → `Projetos` → `Stack` → `Sobre mim` → `Trajetória` → `Formação` → `Footer`.
 
 **Atualização de 31/07/2026 (v7)**, depois que a leitura dos repositórios mostrou que a engenharia real dos projetos era mais forte do que a página comunicava:
 
@@ -94,6 +102,14 @@ As três famílias de 011 implementadas e validadas: revelação na entrada via 
 Com a separação entre Trajetória e Formação (pedida pelo autor), a seção **Trajetória exibe dois cargos administrativos e nenhum de desenvolvimento**, logo após um "sobre mim" que afirma com força que ele é desenvolvedor full stack. Para o recrutador é leitura normal; para o cliente, é a seção que mais pode plantar a dúvida que o resto da página dissipou.
 
 Foram oferecidas três saídas (manter, mover para depois do CTA ou para uma página `/sobre`, ou renomear para "Experiência" incluindo o desenvolvimento). **O autor optou por manter.** A costura que impede a leitura de contradição é a última frase da entrada da Silcon: "foi o problema daqui que virou o sistema de almoxarifado que está em uso hoje". Essa frase é estrutural, não decorativa; se a copy final for reescrita, ela precisa sobreviver em alguma forma.
+
+### Segundo risco aceito: a página não tem chamada de fechamento
+
+A v8 removeu o banner de CTA do fim do one-pager, por decisão do autor. Isso **altera a resolução de 009**, que havia fixado três pontos de chamada e argumentava que quem chega ao fim da página é o lead mais quente que existe nela.
+
+Sobram dois pontos: a pill "Pedir um orçamento" no hero, e o CTA no fim de cada página de case. No one-pager, o caminho de conversão passa a ser o link de WhatsApp no rodapé, que é um link de rodapé e não uma chamada.
+
+Consequência prática: quem lê a página inteira e se convence termina sem nada pedindo a ação, e precisa procurar. Se algum dia houver medida de conversão, este é o primeiro lugar para olhar.
 
 ### Pendências que este ticket gerou
 

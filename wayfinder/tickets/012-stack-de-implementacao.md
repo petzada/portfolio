@@ -48,6 +48,8 @@ Escolhido pela ergonomia da API declarativa e por ser a linguagem em que o `REFE
 
 Custo aceito: cerca de 4,6 kB iniciais mais aproximadamente 15 kB do `domAnimation`, contra 30 kB do import direto. Fontes: [Motion, reduce bundle size](https://motion.dev/docs/react-reduce-bundle-size), [LazyMotion](https://motion.dev/docs/react-lazy-motion).
 
+**Exceção: o carrossel da seção Stack fica em CSS puro.** Adicionado na v8, é um marquee de laço infinito, sem interação e sem estado. Um `@keyframes` transladando a faixa duplicada até `-50%` resolve o caso na thread de composição, e Motion não traria nada que o CSS não faça aqui. Sob `prefers-reduced-motion`, a animação é desligada e a faixa vira scroll horizontal manual.
+
 **Consequência para a implementação:** o protótipo v6 implementa a revelação com `IntersectionObserver` e transições CSS. Esse código **não é a referência de motion**; ele será reescrito com `m` e `whileInView`. O que o protótipo fixa são os valores (opacidade 0 a 1, deslocamento de 16 a 24px, 0,45 a 0,6s, `easeOut`, uma vez só) e o comportamento sob `prefers-reduced-motion`, que continua obrigatório via `useReducedMotion()`.
 
 ### Componentes: nenhuma biblioteca
