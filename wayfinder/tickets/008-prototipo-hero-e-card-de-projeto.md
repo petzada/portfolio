@@ -40,16 +40,15 @@ Consultar a skill `design-taste-frontend`. Salvar em `wayfinder/assets/` e apont
 
 ## Resolution
 
-**Referência final aprovada: [`wayfinder/assets/008-prototipo-v9.html`](../assets/008-prototipo-v9.html).** As anteriores (`v1` a `v8`) ficam no diretório como registro do caminho, mas apenas a v9 vale.
+**Referência final aprovada: [`wayfinder/assets/008-prototipo-v10.html`](../assets/008-prototipo-v10.html).** As anteriores (`v1` a `v9`) ficam no diretório como registro do caminho, mas apenas a v10 vale.
 
-**Fechamento em 31/07/2026 (v9):**
+**Fechamento em 31/07/2026 (v10):**
 
-- **Página inteira centralizada.** Todo texto passa a ser alinhado ao centro, não à esquerda. As regras estão agrupadas no bloco `v9: CENTRALIZAÇÃO` ao fim do `<style>`, deliberadamente juntas para leitura; **na implementação, incorporar em cada componente** em vez de manter como camada de sobrescrita.
-- **A timeline mudou de estrutura, não só de alinhamento.** A linha vertical foi para o meio e o ponto subiu para o topo de cada entrada, deixando de ser marcador lateral.
+- **Alinhamento à esquerda.** A página inteira centralizada foi testada na v9 e **revertida por decisão do autor**. A v9 fica no diretório apenas como registro do experimento, junto com a variante centrada da timeline que ela exigia.
 - **A descrição abaixo do carrossel saiu.** A seção Stack é só o carrossel.
-- **Quebras verificadas em 390px:** nome, cargo e corpo ganham escala reduzida própria; data da trajetória e status do card empilham em coluna em vez de espremer ao lado do título; e-mail e links do rodapé recebem `overflow-wrap: anywhere`, já que o endereço é a string mais longa da página.
+- **Quebras verificadas em 390px:** nome, cargo e corpo ganham escala reduzida própria; data da trajetória e status do card empilham em coluna em vez de espremer ao lado do título; e-mail e links do rodapé recebem `overflow-wrap: anywhere`, já que o endereço é a string mais longa da página. As regras estão agrupadas ao fim do `<style>` para leitura; **na implementação, incorporar em cada componente** em vez de manter como camada de sobrescrita.
 
-**Ressalva registrada, não impeditiva:** a centralização custa legibilidade no "Sobre mim", que é o único bloco com parágrafos longos. Texto centralizado tira do olho a margem fixa de retorno a cada linha. O autor foi avisado e optou por centralizar tudo. Reverter apenas essa seção é uma linha de CSS, caso a leitura incomode depois.
+**Nota sobre o experimento da v9:** centralizar custa legibilidade em bloco de parágrafo longo, porque o olho perde a margem fixa de retorno a cada linha, e o "Sobre mim" tem cinco parágrafos. A reversão resolve isso. Fica registrado que a alternativa foi testada e descartada com a página montada à frente, não no abstrato.
 
 **Atualização de 31/07/2026 (v8):**
 
