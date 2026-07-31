@@ -18,6 +18,20 @@ Depende de **Oferta e posicionamento freelance** (001): só dá para saber quant
 
 **Herdado de 011:** a direção visual escolhida aproxima a página do formato de currículo online. Isso facilita muito atender o recrutador — mas aumenta o risco oposto ao que este ticket foi criado para evitar: em vez de o recrutador ser espremido, o **cliente** é que pode sumir. Ao decidir quanto espaço a carreira ocupa, lembrar que a prioridade declarada em 001 continua sendo o cliente freelance.
 
+**Grande parte já foi decidida em 008**, ao aprovar o protótipo v6. O mecanismo de separação existe e está construído:
+
+- **"Sobre mim"** como seção própria da home, logo após os projetos.
+- **"Trajetória"**: timeline vertical apenas com os empregos.
+- **"Formação"**: seção separada, depois da trajetória, em duas colunas (curso e idiomas). Formação em andamento **com as datas visíveis**.
+- **Currículo baixável**: existe, como pill "Baixar CV" no hero.
+- **Stack visível**: chips no bloco "Sobre mim".
+- **Contato secundário**: LinkedIn e GitHub como pills, ao lado do CTA principal.
+- A experiência administrativa ficou do lado **cliente** da narrativa, e não do lado currículo, exatamente como este ticket previa.
+
+O risco que sobrou está registrado em 008: Trajetória isolada exibe dois cargos administrativos e nenhum de desenvolvimento. O autor optou conscientemente por manter.
+
+Resta fechar:
+
 Precisa fechar com:
 
 1. **O mecanismo de separação** — seção discreta no fim do one-pager, página `/sobre` própria, ou apenas links de LinkedIn e GitHub no rodapé. O que existe sem competir com o CTA primário.

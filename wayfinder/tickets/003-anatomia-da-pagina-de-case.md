@@ -16,6 +16,8 @@ A decisão de estrutura já está tomada — one-pager mais uma página por proj
 
 Depende de **Curadoria dos projetos** (002): o gabarito precisa caber em todos os projetos que de fato entraram.
 
+**Insumo de 008.** O protótipo v6 já esboça um esqueleto de case, que serve de ponto de partida mas **não é decisão**: volta, nome do projeto em Orbitron, frase de uma linha, meta (URL e stack), captura de abertura em 16:9, e as seções "O problema", "O que foi construído" (com captura de apoio no meio) e "Decisões técnicas". Esta última já entrou marcada como candidata a ficar recolhida, dado que o leitor primário é cliente e o secundário é tech lead.
+
 Precisa fechar com:
 
 1. **A sequência de seções**, na ordem em que o leitor as encontra. Um esqueleto plausível para PME — problema, contexto da operação, o que foi construído, telas, decisões técnicas e por quê, resultado, stack, CTA — mas a ordem e o corte são a decisão.

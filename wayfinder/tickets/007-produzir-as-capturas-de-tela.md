@@ -20,6 +20,15 @@ Depende de **Curadoria dos projetos** (002), que diz *quais* projetos, e de **An
 
 **Projetos definidos por 002, nesta ordem:** Ceremony (ceremony.com.br) · Silcon (estoque/almoxarifado) · Evoluteam (RH, PDI e avaliação). Feltrin Noivas está fora. Os três estão vivos, então todos podem ser capturados com dados reais em vez de mock.
 
+**Especificações herdadas de 008.** O protótipo aprovado define o que cada imagem precisa ser:
+
+- **Card de destaque** (Ceremony): 16:9, alvo 1920 × 1080.
+- **Cards secundários** (Silcon, Evoluteam): 16:10, alvo 1600 × 1000.
+- **Abertura da página de case**: 16:9, a tela que melhor vende o projeto.
+- **Capturas de apoio no case**: 16:9.
+- **Retrato do autor**: quadrado, exibido em círculo de 112px. Item novo, não existia no ticket original.
+- Nos cards 2-up a imagem renderiza com cerca de 370px de largura. Capturar pensando nisso: tela densa demais vira textura nesse tamanho. Se o Silcon não sobreviver, isso reabre a largura de coluna (800px versus 896px).
+
 Trabalho a executar:
 
 1. Subir cada projeto selecionado localmente, com **dados de exemplo plausíveis** — nada de tabela vazia, "Lorem ipsum", ou nome de cliente de teste. Tela de produto vazia mata a credibilidade mais rápido do que tela nenhuma.

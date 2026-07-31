@@ -16,6 +16,8 @@ Modelagem de domínio: existe uma entidade — o Projeto — que aparece em duas
 
 Depende de **Curadoria dos projetos** (002) e **Anatomia da página de case** (003): o formato de dado só pode ser desenhado depois que os campos existirem.
 
+**Insumo de 008.** Os campos que o protótipo v6 já exercita para cada projeto: `nome` (renderizado em caixa alta), `descricao_curta` (uma frase, consequência e não funcionalidade), `status` (ativo ou inativo, renderizado como ponto sólido ou vazado, sem cor), `stack` (lista de chips), `url_publica` (opcional; só o Ceremony tem), `destaque` (booleano; governa se o card ocupa a largura inteira ou meia), e as capturas com suas proporções por posição. Notar que `status` **não** é texto livre: os rótulos "no ar", "em uso" e "demo" já apareceram, e precisam virar um conjunto fechado.
+
 Precisa fechar com:
 
 1. **O tipo `Projeto`** — todos os campos, quais são obrigatórios, quais opcionais, e o que acontece na renderização quando um opcional falta (o caso "projeto sem métrica de resultado" de 003 precisa ter resposta no tipo, não no JSX).

@@ -18,6 +18,16 @@ Depende de **Oferta e posicionamento freelance** (001): o CTA é a oferta transf
 
 **Herdado de 011:** a direção visual escolhida é a de portfólio-currículo — coluna estreita, monocromática, sem acento. Esse formato serve naturalmente o recrutador (audiência secundária) e não faz sozinho o trabalho de vender serviço ao cliente freelance (audiência primária, definida em 001). **Sem cor de acento, o CTA não tem botão colorido para se destacar** — a ênfase terá de vir de posição, espaço e texto. Este ticket é onde essa lacuna é compensada, ou não é.
 
+**Pré-decidido em 008**, ao aprovar o protótipo v6. Não reabrir sem motivo:
+
+- **Rótulo único: "Pedir um orçamento"**, idêntico no hero e no CTA final. Um rótulo por intenção.
+- **Duas posições**: pills do hero e banner de fechamento. Não há CTA fixo no mobile.
+- **Microcópia de redução de atrito**: "Respondo com uma ideia de escopo e uma faixa de preço, sem compromisso." Sem promessa de prazo.
+- **Exposição**: e-mail e cidade aparecem; **telefone não**.
+- Sem acento cromático, o botão primário se destaca por preenchimento sólido em `ink` sobre canvas claro.
+
+Resta decidir, e é o coração do ticket:
+
 Precisa fechar com:
 
 1. **A ação única primária** — orçamento por WhatsApp, agendamento de conversa, e-mail. Uma só; duas ações de mesmo peso reduzem as duas.

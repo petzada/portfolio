@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protótipo 008 v4 · disposição v2 com copy revisada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PROTÓTIPO DESCARTÁVEL v4, ticket 008. CANDIDATO FINAL.
+   Disposicao: a da v2, empilhada, inspirada no Anderson (REFERENCIAS 3.1).
+   Copy: a revisada na v3. A linha abaixo do nome vende o que ele resolve,
+   em vez de repetir o cargo.
+   Tipografia e cor por 011. Raio unico: 12px midia, 8px controles, circulo no avatar.
+   ============================================================ */
+
+:root{
+  --canvas:#fafafa; --surface:#ffffff;
+  --ink:#0b0b0b; --muted:#6b6b6b; --subtle:#949494;
+  --line:#e5e5e5; --line-strong:#d4d4d4;
+  --col:800px; --pad-x:24px;
+  --r-media:12px; --r-control:8px;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+[data-theme="dark"]{
+  --canvas:#0b0b0b; --surface:#16171a;
+  --ink:#f5f5f5; --muted:#a1a1a1; --subtle:#6f7176;
+  --line:#26282d; --line-strong:#34373d;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--canvas);color:var(--ink);
+  font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.6;letter-spacing:-.01em;
+  transition:background 200ms linear,color 200ms linear}
+.display{font-family:Orbitron,system-ui,sans-serif;font-weight:700;line-height:1.06;letter-spacing:-.005em}
+
+.tools{position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+  padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+.tools__t{font-size:12px;font-weight:600;color:var(--muted);margin-right:auto}
+.tools button{font:inherit;font-size:13px;font-weight:500;padding:7px 13px;border-radius:var(--r-control);
+  border:1px solid var(--line-strong);background:var(--canvas);color:var(--ink);cursor:pointer;transition:border-color 150ms}
+.tools button:hover{border-color:var(--ink)}
+.tools button:active{transform:translateY(1px)}
+.tools button[aria-pressed="true"]{background:var(--ink);color:var(--canvas);border-color:var(--ink)}
+
+.wrap{max-width:var(--col);margin:0 auto;padding:0 var(--pad-x)}
+body.is-narrow .wrap{max-width:390px}
+body.is-narrow{--pad-x:20px}
+.page{display:none}.page.on{display:block}
+
+/* ---------- hero empilhado, disposicao da v2 ---------- */
+.hero{padding:80px 0 0}
+body.is-narrow .hero{padding:48px 0 0}
+
+.avatar{width:112px;height:112px;border-radius:50%;
+  border:1px solid var(--line-strong);background:var(--surface);
+  display:grid;place-content:center;text-align:center;font-size:11px;color:var(--subtle);line-height:1.3;
+  margin-bottom:28px}
+body.is-narrow .avatar{width:88px;height:88px}
+
+.name{font-size:clamp(28px,6.2vw,44px);margin:0}
+.pitch{font-size:19px;font-weight:500;color:var(--ink);margin:16px 0 0;max-width:32ch;letter-spacing:-.02em}
+
+.meta{display:flex;flex-wrap:wrap;gap:8px 16px;margin:18px 0 0;font-size:13px;color:var(--subtle)}
+.meta a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line-strong)}
+.meta a:hover{color:var(--ink);border-color:var(--ink)}
+
+.about{font-size:18px;line-height:1.65;color:var(--muted);max-width:60ch;margin:26px 0 0}
+.about strong{color:var(--ink);font-weight:600}
+
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin:30px 0 0}
+.pill{font:inherit;font-size:13px;font-weight:600;padding:9px 16px;border-radius:999px;
+  border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);
+  text-decoration:none;white-space:nowrap;transition:border-color 150ms}
+.pill:hover{border-color:var(--ink)}
+.pill:active{transform:translateY(1px)}
+.pill--solid{background:var(--ink);color:var(--canvas);border-color:var(--ink)}
+.pill--solid:hover{opacity:.86}
+
+.label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--subtle);
+  border-bottom:1px solid var(--line);padding-bottom:10px;margin:96px 0 32px}
+body.is-narrow .label{margin:64px 0 24px}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.grid .card--lead{grid-column:1 / -1}
+body.is-narrow .grid{grid-template-columns:1fr;gap:32px}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
+
+.card{display:block;text-decoration:none;color:inherit;cursor:pointer}
+.shot{position:relative;aspect-ratio:16/10;border-radius:var(--r-media);border:1px solid var(--line);
+  background:var(--surface);overflow:hidden;transition:box-shadow 300ms var(--ease),border-color 300ms var(--ease)}
+.card--lead .shot{aspect-ratio:16/9}
+.card:hover .shot{box-shadow:0 8px 30px rgb(0 0 0/.10);border-color:var(--line-strong)}
+[data-theme="dark"] .card:hover .shot{box-shadow:0 8px 30px rgb(0 0 0/.55)}
+.shot__in{position:absolute;inset:0;display:grid;place-content:center;text-align:center;gap:4px;
+  transition:transform 500ms var(--ease)}
+.card:hover .shot__in{transform:scale(1.05)}
+.slot{font-size:12px;color:var(--subtle)}
+.slot b{display:block;font-weight:600;color:var(--muted);font-size:13px;margin-bottom:2px}
+
+.card__head{display:flex;align-items:baseline;gap:10px;margin:16px 0 0}
+.card__name{font-size:16px;margin:0}
+.card--lead .card__name{font-size:20px}
+.card__desc{margin:8px 0 0;font-size:14px;color:var(--muted)}
+.card--lead .card__desc{font-size:15px;max-width:56ch}
+.status{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;
+  color:var(--muted);white-space:nowrap}
+.status i{width:6px;height:6px;border-radius:50%;background:var(--muted);display:block}
+.status--off i{background:transparent;border:1px solid var(--subtle)}
+.stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;font-size:11px;color:var(--muted)}
+.stack span{border:1px solid var(--line);border-radius:var(--r-control);padding:3px 8px}
+
+.back{display:inline-flex;align-items:center;gap:7px;margin:32px 0 0;font-size:13px;font-weight:600;
+  color:var(--muted);text-decoration:none;cursor:pointer;background:none;border:0;font-family:inherit}
+.back:hover{color:var(--ink)}
+.case__head{padding:28px 0 0}
+.case__name{font-size:clamp(23px,5.2vw,34px);margin:0}
+.case__line{font-size:19px;color:var(--muted);margin:14px 0 0;max-width:52ch}
+.case__meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin:22px 0 0;font-size:13px;color:var(--subtle)}
+.shot--hero{aspect-ratio:16/9;margin-top:36px}
+.shot--wide{aspect-ratio:16/9;margin-top:20px}
+.case__body{margin-top:56px;display:grid;gap:40px}
+.case__body h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--subtle);margin:0 0 12px}
+.case__body p{margin:0;color:var(--muted);max-width:62ch}
+
+.reveal{opacity:0;transform:translateY(20px)}
+.reveal.in{opacity:1;transform:none;transition:opacity 550ms var(--ease),transform 550ms var(--ease)}
+@media (prefers-reduced-motion:reduce){
+  .reveal,.reveal.in{opacity:1;transform:none;transition:none}
+  .shot__in,.card:hover .shot__in{transition:none;transform:none}
+}
+footer.end{padding:120px 0}
+</style>
+</head>
+<body>
+
+<div class="tools">
+  <span class="tools__t">Protótipo 008 v4</span>
+  <button id="nav" aria-pressed="false">Ver página de case</button>
+  <button id="theme" aria-pressed="false">Tema escuro</button>
+  <button id="narrow" aria-pressed="false">Ver em 390px</button>
+</div>
+
+<div class="page on" id="home">
+<section class="wrap hero reveal">
+  <div class="avatar">foto<br>112px</div>
+  <h1 class="display name">MARCIO<br>PETIGROSSO</h1>
+  <p class="pitch">Sistemas sob medida para o processo que a sua empresa já tem.</p>
+  <div class="meta">
+    <span>Mauá, SP</span>
+    <a href="#">marciopetigrosso@gmail.com</a>
+  </div>
+  <p class="about">
+    Estoque, gestão, RH e produtos digitais. Sem forçar o seu negócio a caber num software de prateleira.
+    Antes de programar, trabalhei <strong>dentro</strong> de um almoxarifado industrial, controlando compras
+    e custos. Conheço o processo que o software precisa resolver.
+  </p>
+  <div class="actions">
+    <a class="pill pill--solid" href="#">Pedir um orçamento</a>
+    <a class="pill" href="#">LinkedIn</a>
+    <a class="pill" href="#">GitHub</a>
+    <a class="pill" href="#">Baixar CV</a>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="label">Projetos</p>
+  <div class="grid">
+
+    <a class="card card--lead reveal" data-go="case">
+      <div class="shot"><div class="shot__in">
+        <span class="slot"><b>captura do Ceremony</b>1920 × 1080, lista de presentes</span>
+      </div></div>
+      <div class="card__head">
+        <h3 class="display card__name">CEREMONY</h3>
+        <span class="status"><i></i>no ar</span>
+      </div>
+      <p class="card__desc">Os convidados presenteiam por PIX e o casal recebe na hora, sem plataforma segurando o dinheiro por semanas.</p>
+      <div class="stack"><span>Next.js</span><span>TypeScript</span><span>PIX</span></div>
+    </a>
+
+    <a class="card reveal" data-go="case">
+      <div class="shot"><div class="shot__in">
+        <span class="slot"><b>captura do Silcon</b>1600 × 1000</span>
+      </div></div>
+      <div class="card__head">
+        <h3 class="display card__name">SILCON</h3>
+        <span class="status"><i></i>em uso</span>
+      </div>
+      <p class="card__desc">O almoxarifado sabe o que está acabando antes de faltar na linha.</p>
+      <div class="stack"><span>Next.js</span><span>PostgreSQL</span></div>
+    </a>
+
+    <a class="card reveal" data-go="case">
+      <div class="shot"><div class="shot__in">
+        <span class="slot"><b>captura do Evoluteam</b>1600 × 1000</span>
+      </div></div>
+      <div class="card__head">
+        <h3 class="display card__name">EVOLUTEAM</h3>
+        <span class="status status--off"><i></i>demo</span>
+      </div>
+      <p class="card__desc">Avaliação de desempenho e PDI com histórico, fora da planilha compartilhada.</p>
+      <div class="stack"><span>stack a confirmar</span></div>
+    </a>
+
+  </div>
+</section>
+<footer class="end"></footer>
+</div>
+
+<div class="page" id="case">
+<section class="wrap">
+  <button class="back" data-go="home">voltar</button>
+  <div class="case__head reveal">
+    <h1 class="display case__name">CEREMONY</h1>
+    <p class="case__line">Os convidados presenteiam por PIX e o casal recebe na hora, sem plataforma segurando o dinheiro por semanas.</p>
+    <div class="case__meta">
+      <span>No ar em ceremony.com.br</span>
+      <span>Next.js, TypeScript, PIX</span>
+    </div>
+  </div>
+
+  <div class="shot shot--hero reveal"><div class="shot__in">
+    <span class="slot"><b>captura principal do Ceremony</b>1920 × 1080, a tela que melhor vende o produto</span>
+  </div></div>
+
+  <div class="case__body">
+    <div class="reveal">
+      <h3>O problema</h3>
+      <p>A lista de casamento tradicional obriga o convidado a comprar um objeto de loja e o casal a receber o que não escolheu. As plataformas que resolvem isso costumam reter o dinheiro por semanas.</p>
+    </div>
+    <div class="shot shot--wide reveal"><div class="shot__in">
+      <span class="slot"><b>captura secundária</b>fluxo de presente ou painel do casal</span>
+    </div></div>
+    <div class="reveal">
+      <h3>O que foi construído</h3>
+      <p>Placeholder. As seções do case são definidas pelo ticket 003. Aqui só o esqueleto, para julgar a proporção da captura grande e o ritmo da leitura.</p>
+    </div>
+    <div class="reveal">
+      <h3>Decisões técnicas</h3>
+      <p>Placeholder. Seção candidata a ficar recolhida, já que o leitor primário é cliente e o secundário é tech lead.</p>
+    </div>
+  </div>
+</section>
+<footer class="end"></footer>
+</div>
+
+<script>
+(function(){
+  var body=document.body,root=document.documentElement;
+  var pages={home:document.getElementById('home'),case:document.getElementById('case')};
+  var navBtn=document.getElementById('nav');
+  function show(id){
+    for(var k in pages) pages[k].classList.toggle('on',k===id);
+    navBtn.textContent=id==='home'?'Ver página de case':'Voltar para a home';
+    navBtn.setAttribute('aria-pressed',String(id!=='home'));
+    window.scrollTo(0,0); observe();
+  }
+  navBtn.addEventListener('click',function(){show(pages.home.classList.contains('on')?'case':'home')});
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-go]'); if(t){e.preventDefault();show(t.getAttribute('data-go'))}
+  });
+  document.getElementById('theme').addEventListener('click',function(){
+    var d=root.getAttribute('data-theme')==='dark';
+    root.setAttribute('data-theme',d?'light':'dark');
+    this.setAttribute('aria-pressed',String(!d));
+    this.textContent=d?'Tema escuro':'Tema claro';
+  });
+  document.getElementById('narrow').addEventListener('click',function(){
+    var on=body.classList.toggle('is-narrow');
+    this.setAttribute('aria-pressed',String(on));
+    this.textContent=on?'Ver em desktop':'Ver em 390px';
+  });
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var io=(!reduce&&'IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+  },{threshold:.12}):null;
+  function observe(){
+    document.querySelectorAll('.page.on .reveal').forEach(function(el){
+      if(!io){el.classList.add('in');return}
+      if(!el.classList.contains('in')) io.observe(el);
+    });
+  }
+  observe();
+})();
+</script>
+</body>
+</html>

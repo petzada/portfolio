@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protótipo 008 · hero e card de projeto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PROTÓTIPO DESCARTÁVEL, ticket 008.
+   Direção fixada por 011: light padrão + toggle dark, coluna ~800px,
+   Orbitron no display, Inter no corpo, zero acento cromático.
+   Sistema de raio: 12px mídia e cards, 8px controles. Um só, aplicado a tudo.
+   ============================================================ */
+
+:root {
+  --canvas:  #fafafa;
+  --surface: #ffffff;
+  --ink:     #0b0b0b;
+  --muted:   #6b6b6b;
+  --subtle:  #949494;
+  --line:    #e5e5e5;
+  --line-strong: #d4d4d4;
+
+  --col: 800px;
+  --pad-x: 24px;
+  --gap-section: 96px;
+
+  --r-media: 12px;
+  --r-control: 8px;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 500ms;
+}
+
+/* Tema escuro. A escada de superfícies vem do research 006, com o leve
+   tom azulado preservado, ancorada no canvas #0b0b0b do REFERENCIAS. */
+[data-theme="dark"] {
+  --canvas:  #0b0b0b;
+  --surface: #16171a;
+  --ink:     #f5f5f5;
+  --muted:   #a1a1a1;
+  --subtle:  #6f7176;
+  --line:    #26282d;
+  --line-strong: #34373d;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  transition: background 200ms linear, color 200ms linear;
+}
+
+.display {
+  font-family: Orbitron, system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+/* --- chrome do protótipo. Não faz parte do design da página. ------------ */
+
+.tools {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  padding: 12px 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+.tools__title {
+  font-size: 12px; font-weight: 600; color: var(--muted);
+  margin-right: auto; letter-spacing: 0;
+}
+.tools button {
+  font: inherit; font-size: 13px; font-weight: 500;
+  padding: 7px 13px;
+  border-radius: var(--r-control);
+  border: 1px solid var(--line-strong);
+  background: var(--canvas);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 150ms linear, border-color 150ms linear;
+}
+.tools button:hover { border-color: var(--ink); }
+.tools button:active { transform: translateY(1px); }
+.tools button[aria-pressed="true"] { background: var(--ink); color: var(--canvas); border-color: var(--ink); }
+
+.marker {
+  max-width: var(--col); margin: 0 auto; padding: 0 var(--pad-x);
+  font-size: 12px; font-weight: 600; color: var(--subtle);
+  border-top: 1px solid var(--line);
+  padding-top: 14px; margin-top: var(--gap-section);
+}
+.marker span { color: var(--muted); font-weight: 400; }
+
+/* --- página ------------------------------------------------------------- */
+
+.wrap {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+
+/* modo de inspeção mobile, acionado pela barra de ferramentas */
+body.is-narrow .wrap,
+body.is-narrow .marker { max-width: 390px; }
+body.is-narrow { --pad-x: 20px; }
+
+.hero { padding: 72px 0 24px; }
+body.is-narrow .hero { padding: 48px 0 16px; }
+
+.lede {
+  font-size: 18px; color: var(--muted);
+  max-width: 46ch; margin: 20px 0 0;
+}
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+
+.btn {
+  font: inherit; font-size: 14px; font-weight: 600;
+  padding: 11px 20px;
+  border-radius: var(--r-control);
+  border: 1px solid var(--ink);
+  background: var(--ink); color: var(--canvas);
+  text-decoration: none; white-space: nowrap;
+  display: inline-block;
+  transition: opacity 150ms linear;
+}
+.btn:hover { opacity: .84; }
+.btn:active { transform: translateY(1px); }
+.btn--ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn--ghost:hover { border-color: var(--ink); opacity: 1; }
+
+/* --- cards de projeto --------------------------------------------------- */
+
+.projects { display: grid; gap: 56px; padding-top: 8px; }
+body.is-narrow .projects { gap: 40px; }
+
+.card { display: block; text-decoration: none; color: inherit; }
+
+.shot {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--r-media);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  overflow: hidden;
+  transition: box-shadow 300ms var(--ease), border-color 300ms var(--ease);
+}
+.card:hover .shot { box-shadow: 0 8px 30px rgb(0 0 0 / .10); border-color: var(--line-strong); }
+[data-theme="dark"] .card:hover .shot { box-shadow: 0 8px 30px rgb(0 0 0 / .55); }
+
+/* variante sangrada: mídia sem moldura, encostando na coluna */
+.shot--bleed { border-radius: var(--r-media); border-color: transparent; background: var(--surface); }
+
+.shot__inner {
+  position: absolute; inset: 0;
+  display: grid; place-content: center; gap: 6px; text-align: center;
+  transition: transform var(--dur) var(--ease);
+}
+.card:hover .shot__inner { transform: scale(1.05); }
+
+/* slot de captura. Substituir por <img> quando o ticket 007 rodar. */
+.slot {
+  font-size: 13px; font-weight: 500; color: var(--subtle);
+}
+.slot b { display: block; font-weight: 600; color: var(--muted); font-size: 14px; }
+
+.card__head {
+  display: flex; align-items: baseline; gap: 12px;
+  margin: 18px 0 0;
+}
+.card__name { font-size: 20px; margin: 0; }
+.card__desc { margin: 8px 0 0; color: var(--muted); max-width: 54ch; }
+
+.status {
+  margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 500; color: var(--muted);
+  white-space: nowrap;
+}
+.status i {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--muted); display: block;
+}
+.status--off i { background: transparent; border: 1px solid var(--subtle); }
+
+.stack {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px;
+  font-size: 12px; color: var(--muted);
+}
+.stack span {
+  border: 1px solid var(--line); border-radius: var(--r-control);
+  padding: 3px 9px;
+}
+
+/* --- motion: revelação na entrada, uma família, com respeito a reduced-motion */
+.reveal { opacity: 0; transform: translateY(20px); }
+.reveal.in { opacity: 1; transform: none; transition: opacity 550ms var(--ease), transform 550ms var(--ease); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.in { opacity: 1; transform: none; transition: none; }
+  .shot__inner, .card:hover .shot__inner { transition: none; transform: none; }
+  * { scroll-behavior: auto; }
+}
+
+footer.end { padding: var(--gap-section) 0 120px; }
+</style>
+</head>
+<body>
+
+<div class="tools">
+  <span class="tools__title">Protótipo 008 · hero e card de projeto</span>
+  <button id="theme" aria-pressed="false">Tema escuro</button>
+  <button id="narrow" aria-pressed="false">Ver em 390px</button>
+</div>
+
+<!-- ============ VARIANTE A ============ -->
+<p class="marker">VARIANTE A <span>· nome contido, 44px. O posicionamento divide o palco com o nome.</span></p>
+<section class="wrap hero reveal">
+  <h1 class="display" style="font-size:clamp(30px,6vw,44px);margin:0;">MARCIO PETIGROSSO</h1>
+  <p class="lede">Construo sistemas web sob medida: gestão, operação e produtos que empresas usam todo dia.</p>
+  <div class="actions">
+    <a class="btn" href="#">Falar comigo</a>
+    <a class="btn btn--ghost" href="#">Ver projetos</a>
+  </div>
+</section>
+
+<!-- ============ VARIANTE B ============ -->
+<p class="marker">VARIANTE B <span>· nome pôster, ocupando a coluna inteira. Orbitron carrega tudo sozinha.</span></p>
+<section class="wrap hero reveal">
+  <h1 class="display" style="font-size:clamp(34px,10.5vw,88px);margin:0;letter-spacing:-0.02em;">
+    MARCIO<br>PETIGROSSO
+  </h1>
+  <p class="lede" style="max-width:40ch;">Sistemas web sob medida para quem precisa que funcione todo dia.</p>
+  <div class="actions"><a class="btn" href="#">Falar comigo</a></div>
+</section>
+
+<!-- ============ VARIANTE C ============ -->
+<p class="marker">VARIANTE C <span>· Orbitron vira assinatura pequena. Quem fala grande é a frase, em Inter.</span></p>
+<section class="wrap hero reveal">
+  <p class="display" style="font-size:15px;letter-spacing:.16em;margin:0 0 28px;color:var(--muted);">MARCIO PETIGROSSO</p>
+  <h1 style="font-family:Inter,sans-serif;font-weight:600;font-size:clamp(28px,5.4vw,42px);line-height:1.15;letter-spacing:-0.03em;margin:0;max-width:20ch;">
+    Sistemas web sob medida, construídos para durar na operação.
+  </h1>
+  <p class="lede">Gestão, estoque, RH e produtos digitais. De um dev que já trabalhou do outro lado do balcão.</p>
+  <div class="actions">
+    <a class="btn" href="#">Falar comigo</a>
+    <a class="btn btn--ghost" href="#">Ver projetos</a>
+  </div>
+</section>
+
+<!-- ============ CARDS ============ -->
+<p class="marker">CARD, TRATAMENTO 1 <span>· mídia emoldurada, hairline visível. O card se declara um objeto.</span></p>
+<section class="wrap projects">
+  <a class="card reveal" href="#">
+    <div class="shot"><div class="shot__inner">
+      <span class="slot"><b>captura do Ceremony</b>1600 × 1000, tela de lista de presentes</span>
+    </div></div>
+    <div class="card__head">
+      <h3 class="display card__name">CEREMONY</h3>
+      <span class="status"><i></i>no ar</span>
+    </div>
+    <p class="card__desc">Noivos montam a lista de presentes e recebem o valor direto por PIX, sem intermediário segurando o dinheiro.</p>
+    <div class="stack"><span>Next.js</span><span>TypeScript</span><span>PIX</span></div>
+  </a>
+</section>
+
+<p class="marker">CARD, TRATAMENTO 2 <span>· mídia sangrada, sem moldura. A tela encosta na coluna e o texto flutua abaixo.</span></p>
+<section class="wrap projects">
+  <a class="card reveal" href="#">
+    <div class="shot shot--bleed"><div class="shot__inner">
+      <span class="slot"><b>captura do Ceremony</b>1600 × 1000, tela de lista de presentes</span>
+    </div></div>
+    <div class="card__head">
+      <h3 class="display card__name">CEREMONY</h3>
+      <span class="status"><i></i>no ar</span>
+    </div>
+    <p class="card__desc">Noivos montam a lista de presentes e recebem o valor direto por PIX, sem intermediário segurando o dinheiro.</p>
+    <div class="stack"><span>Next.js</span><span>TypeScript</span><span>PIX</span></div>
+  </a>
+</section>
+
+<!-- ============ GRADE COMPLETA ============ -->
+<p class="marker">GRADE COMPLETA <span>· os três, na ordem de 002. Aqui se vê o ritmo vertical e se um card puxa os outros para baixo.</span></p>
+<section class="wrap projects">
+
+  <a class="card reveal" href="#">
+    <div class="shot"><div class="shot__inner">
+      <span class="slot"><b>captura do Ceremony</b>1600 × 1000</span>
+    </div></div>
+    <div class="card__head">
+      <h3 class="display card__name">CEREMONY</h3>
+      <span class="status"><i></i>no ar</span>
+    </div>
+    <p class="card__desc">Noivos montam a lista de presentes e recebem o valor direto por PIX, sem intermediário segurando o dinheiro.</p>
+    <div class="stack"><span>Next.js</span><span>TypeScript</span><span>PIX</span></div>
+  </a>
+
+  <a class="card reveal" href="#">
+    <div class="shot"><div class="shot__inner">
+      <span class="slot"><b>captura do Silcon</b>1600 × 1000, dashboard ou movimentações</span>
+    </div></div>
+    <div class="card__head">
+      <h3 class="display card__name">SILCON ESTOQUE</h3>
+      <span class="status"><i></i>em uso</span>
+    </div>
+    <p class="card__desc">Controle de almoxarifado industrial: catálogo, movimentações, alerta de variação de preço e fila de reposição.</p>
+    <div class="stack"><span>Next.js</span><span>TypeScript</span><span>PostgreSQL</span><span>Tailwind</span></div>
+  </a>
+
+  <a class="card reveal" href="#">
+    <div class="shot"><div class="shot__inner">
+      <span class="slot"><b>captura do Evoluteam</b>1600 × 1000, ciclo de avaliação</span>
+    </div></div>
+    <div class="card__head">
+      <h3 class="display card__name">EVOLUTEAM</h3>
+      <span class="status status--off"><i></i>demo</span>
+    </div>
+    <p class="card__desc">Plano de desenvolvimento individual e ciclo de avaliação de desempenho, para o RH parar de rodar isso em planilha.</p>
+    <div class="stack"><span>stack a confirmar</span></div>
+  </a>
+
+</section>
+
+<p class="marker">TESTE DE ESTRESSE <span>· título longo em Orbitron, o caso que quebra. Ver se cabe e se ainda lê.</span></p>
+<section class="wrap projects">
+  <a class="card reveal" href="#">
+    <div class="shot"><div class="shot__inner"><span class="slot"><b>captura</b>1600 × 1000</span></div></div>
+    <div class="card__head">
+      <h3 class="display card__name">SISTEMA DE CONTROLE DE ESTOQUE</h3>
+    </div>
+    <p class="card__desc">Se este título ficar ilegível ou quebrar feio, os nomes de projeto precisam ser curtos por regra, não por sorte.</p>
+  </a>
+</section>
+
+<footer class="end"></footer>
+
+<script>
+(function () {
+  var body = document.body, root = document.documentElement;
+
+  document.getElementById('theme').addEventListener('click', function () {
+    var dark = root.getAttribute('data-theme') === 'dark';
+    root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    this.setAttribute('aria-pressed', String(!dark));
+    this.textContent = dark ? 'Tema escuro' : 'Tema claro';
+  });
+
+  document.getElementById('narrow').addEventListener('click', function () {
+    var on = body.classList.toggle('is-narrow');
+    this.setAttribute('aria-pressed', String(on));
+    this.textContent = on ? 'Ver em desktop' : 'Ver em 390px';
+  });
+
+  // IntersectionObserver, nunca listener de scroll.
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(function (el) { io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>

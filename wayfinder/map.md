@@ -45,6 +45,8 @@ A construção em si, o deploy e a produção da copy final são esforço separa
 
 - [Conflito de direção visual](tickets/011-conflito-de-direcao-visual.md) — **`REFERENCIAS-PORTFOLIOS.md` vence; `DESIGN.md` perde autoridade.** Light com toggle dark, coluna ~800px, Orbitron no display e Inter no corpo, página monocromática, motion em três famílias, sombra só no hover. Fecha a névoa de motion e traz o toggle de tema de volta ao escopo. A escada de superfícies do 006 é reaproveitada como base do tema dark; a auditoria de contraste precisa ser refeita para canvas claro.
 
+- [Protótipo — hero e card de projeto](tickets/008-prototipo-hero-e-card-de-projeto.md) — referência aprovada em [`assets/008-prototipo-v6.html`](assets/008-prototipo-v6.html), após seis iterações. **Trava a estrutura do one-pager**: Hero → Projetos → Sobre mim → Trajetória → Formação → CTA. Hero empilhado no padrão do Anderson (avatar 112px, nome em Orbitron em duas linhas, pitch, meta, pills). Card emoldurado 16:10, clique abre o case; grade com Ceremony full-width e os outros dois 2-up. Status sem cor (ponto sólido para ativo, vazado para inativo), fechando a pendência de 011. Registro de voz da copy fixado: eixo na capacidade de desenvolvimento, não na origem administrativa.
+
 **Consequência de arquitetura a carregar adiante:** o site não é "estático servido por CDN" — é SSG rodando em servidor Next dentro de um container. Muda o que **Modelo de conteúdo e rotas** (004) pode assumir, e abre a porta para `next/image` de verdade.
 
 ## Not yet specified
