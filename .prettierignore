@@ -1,0 +1,10 @@
+.next
+node_modules
+package-lock.json
+_scrape
+.agents
+.claude
+wayfinder
+CURRICULO.md
+DESIGN.md
+REFERENCIAS-PORTFOLIOS.md

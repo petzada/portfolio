@@ -1,0 +1,8 @@
+.git
+.next
+node_modules
+_scrape
+.agents
+.claude
+npm-debug.log*
+wayfinder/assets/*.html
