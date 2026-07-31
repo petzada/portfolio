@@ -3,8 +3,8 @@ id: 009
 title: Conversão — CTA e captura de contato
 type: grilling
 mode: HITL
-status: open
-assignee:
+status: closed
+assignee: sessao-principal
 blocked_by: [001]
 ---
 
@@ -41,4 +41,52 @@ Consultar a skill `copywriting` para o texto do CTA.
 
 ## Resolution
 
-_(aberto)_
+### Correção de premissa
+
+O ticket foi escrito afirmando que uma página estática não tem backend e que formulário "não é grátis". **Isso deixou de valer em 005**: o modo `standalone` implica um servidor Next rodando, então Server Actions e route handlers eram opções reais. A decisão abaixo foi tomada com o leque completo à vista, não por limitação técnica.
+
+### Mecanismo: WhatsApp com mensagem pré-preenchida
+
+Link `wa.me` abrindo a conversa com texto já escrito, algo como *"Oi Marcio, vi seu portfólio e queria falar sobre um projeto."*
+
+É o canal onde o cliente PME brasileiro de fato responde, e tem o menor atrito possível: nenhum campo para preencher, nenhum cliente de e-mail para abrir, nenhum estado de carregando ou de erro para construir. Para um portfólio cujo objetivo é virar conversa, o formulário próprio adicionaria código, chave de API, tratamento de spam e três estados de UI para resolver um problema que um link resolve.
+
+**Implementação:** âncora comum com a mensagem em `encodeURIComponent`, `target="_blank"` e `rel="noopener noreferrer"`. Nenhuma dependência, nenhuma variável de ambiente.
+
+**Ressalva registrada:** o número não aparece escrito na página, mas é revelado assim que o link abre. O `CURRICULO.md` traz um número pessoal. Recomendação: **usar um WhatsApp Business separado do pessoal**, que além de proteger o número dá horário de atendimento, mensagem automática de ausência e catálogo. Vira pendência do autor.
+
+### Ação primária e posições
+
+**Rótulo único: "Pedir um orçamento"**, idêntico em todos os lugares. Um rótulo por intenção; variar o texto entre o topo e o rodapé dilui os dois.
+
+Aparece em três pontos: pills do hero, banner de fechamento do one-pager, e fim de cada página de case (definido em 003). Sem CTA fixo flutuante no mobile.
+
+Sem acento cromático, a ênfase vem do preenchimento sólido em `ink` sobre canvas claro, decidido em 008.
+
+### Microcópia, revisada
+
+A promessa de responder com escopo e faixa de preço **foi retirada**. Era uma promessa forte e diferenciadora, mas comprometia o autor a orçar antes de entender o projeto. Fica apenas a redução de atrito:
+
+> **Tem um processo que ainda roda na planilha?**
+> Me conte o que trava hoje. A primeira conversa é sem compromisso.
+
+Sem promessa de prazo de resposta, porque também não há intenção de garanti-lo.
+
+### Exposição de dados
+
+| Dado | Na página |
+|---|---|
+| Cidade (Mauá, SP) | sim |
+| E-mail | sim, no hero e no CTA final |
+| Telefone | não, só através do link do WhatsApp |
+| LinkedIn e GitHub | sim, como pills |
+
+**Risco anotado:** e-mail em texto puro e linkável é alvo de raspagem de spam. Como a decisão de exibi-lo já foi tomada em 008, fica a mitigação sugerida para a implementação: renderizar o endereço sem `mailto:` direto no HTML, montando o link no cliente, ou aceitar o spam conscientemente. Decisão de implementação, não de produto.
+
+### Qualificação: nenhuma
+
+Coerente com a oferta ampla de 001 e com o estágio. Não há volume de lead que justifique filtrar, e filtrar cedo custa oportunidade. Sem faixa de orçamento anunciada, sem lista de trabalhos recusados.
+
+### O que este ticket não resolve
+
+O canal do **recrutador** continua sendo LinkedIn, e o que ocupa o lugar do link de repositório é assunto de 010.

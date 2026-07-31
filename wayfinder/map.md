@@ -51,6 +51,8 @@ A construção em si, o deploy e a produção da copy final são esforço separa
 
 - [Modelo de conteúdo e rotas](tickets/004-modelo-de-conteudo-e-rotas.md) — conteúdo em **objetos TypeScript tipados**, um arquivo por projeto, mais `perfil`, `trajetoria` e `formacao` como dados. Estrutura de case regular demais para justificar MDX. Rotas: `/` e `/projetos/[slug]`, estáticas via `generateStaticParams` com `dynamicParams = false`. Imagens por import estático, junto do conteúdo. `status` é união fechada, `alt` é obrigatório, `apoio` é tupla de duas capturas, e **`destaque` foi eliminado**: o primeiro do array é o destaque, por definição. O ticket entrega a estrutura de pastas completa, que é o contrato com a implementação.
 
+- [Conversão — CTA e contato](tickets/009-conversao-cta-e-contato.md) — **WhatsApp com mensagem pré-preenchida** (`wa.me`), o canal onde cliente PME brasileiro responde e o de menor atrito. Rótulo único "Pedir um orçamento" em três pontos: hero, banner de fechamento e fim de cada case. Microcópia revisada, **sem a promessa de escopo e faixa de preço**, apenas "a primeira conversa é sem compromisso". Nenhuma qualificação de lead. Telefone não aparece escrito, mas o link o revela: pendência de criar um **WhatsApp Business separado do pessoal**.
+
 **Consequência de arquitetura a carregar adiante:** o site não é "estático servido por CDN" — é SSG rodando em servidor Next dentro de um container. Muda o que **Modelo de conteúdo e rotas** (004) pode assumir, e abre a porta para `next/image` de verdade.
 
 ## Not yet specified
@@ -60,6 +62,7 @@ Névoa em escopo, ainda sem nitidez para virar ticket. Graduará conforme a fron
 - **Metadata e compartilhamento** — title/description por rota, imagem OG (crítica: link de portfólio circula colado em WhatsApp e DM do LinkedIn), favicon, `sitemap.xml`. Depende do modelo de conteúdo e das rotas.
 - **Contraste no tema claro** — a auditoria do research 006 mediu todos os níveis de texto contra canvas escuro, e 011 tornou o light o padrão. A matriz precisa ser recalculada contra `#fafafa`, e o tema dark do toggle precisa da sua própria verificação.
 - **Sistema de cor do toggle dark** — com "sem acento cromático" e light como padrão, o tema escuro precisa de sua própria paleta neutra. A escada de superfícies do 006 é o ponto de partida.
+- **WhatsApp Business** — 009 definiu o `wa.me` como mecanismo de conversão, e o link revela o número ao abrir. Criar uma conta Business separada do número pessoal, com mensagem de ausência e horário. Pendência de execução do autor, não decisão.
 - **Acesso aos repositórios** — 003 definiu que o autor dá acesso ao GitHub e ao material dos projetos para que os cases sejam redigidos. Pendência de insumo, não decisão.
 - **Idioma** — só PT-BR, ou PT-BR + EN? Inglês A2 no currículo pesa contra manter duas versões; cliente freelance brasileiro não precisa. Revisitar depois que a oferta estiver definida.
 - **Estratégia de imagens e performance** — formato, dimensões e peso das capturas. O modo de servir já está resolvido (`standalone`, `next/image` disponível), então resta a decisão de conteúdo: quanto pesa uma captura de UI densa e como ela se comporta no 4G do lead.
