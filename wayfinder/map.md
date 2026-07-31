@@ -55,6 +55,8 @@ A construção em si, o deploy e a produção da copy final são esforço separa
 
 - [Camada do recrutador](tickets/010-camada-do-recrutador.md) — atendida por três seções próprias no fim do one-pager (Sobre mim, Trajetória, Formação) mais a pill de LinkedIn, sem página separada. Currículo como **PDF estático em `/public`**, atualizado à mão; o `CURRICULO.md` não é sua fonte, são artefatos independentes. **O código não é oferecido**: a pill de GitHub aponta para o perfil e nada substitui o link de repositório que 003 retirou. Consequência registrada: o perfil vira superfície de avaliação não curada, e precisa ser revisado antes da publicação.
 
+- [Stack de implementação](tickets/012-stack-de-implementacao.md) — **duas dependências de runtime além do framework**: `motion` (sempre via `m` + `LazyMotion` com `domAnimation` e `strict`) e `next-themes` (pelo anti-flash no primeiro paint com SSR). **Recusados**: shadcn/ui, biblioteca de ícones e suíte de testes. ESLint com `eslint-config-next` mais Prettier com o plugin do Tailwind. Tokens finais fixados a partir do protótipo v6, em `@theme` do Tailwind v4. O ticket entrega o `package.json`.
+
 **Consequência de arquitetura a carregar adiante:** o site não é "estático servido por CDN" — é SSG rodando em servidor Next dentro de um container. Muda o que **Modelo de conteúdo e rotas** (004) pode assumir, e abre a porta para `next/image` de verdade.
 
 ## Not yet specified
@@ -62,8 +64,7 @@ A construção em si, o deploy e a produção da copy final são esforço separa
 Névoa em escopo, ainda sem nitidez para virar ticket. Graduará conforme a fronteira avançar.
 
 - **Metadata e compartilhamento** — title/description por rota, imagem OG (crítica: link de portfólio circula colado em WhatsApp e DM do LinkedIn), favicon, `sitemap.xml`. Depende do modelo de conteúdo e das rotas.
-- **Contraste no tema claro** — a auditoria do research 006 mediu todos os níveis de texto contra canvas escuro, e 011 tornou o light o padrão. A matriz precisa ser recalculada contra `#fafafa`, e o tema dark do toggle precisa da sua própria verificação.
-- **Sistema de cor do toggle dark** — com "sem acento cromático" e light como padrão, o tema escuro precisa de sua própria paleta neutra. A escada de superfícies do 006 é o ponto de partida.
+- **Contraste da paleta final** — 012 fixou os valores dos dois temas a partir do protótipo v6, mas a única auditoria de contraste existente é a do research 006, feita contra uma paleta escura que foi descartada. A matriz precisa ser recalculada para os pares reais, principalmente `subtle` #949494 sobre `canvas` #fafafa, que é o candidato mais provável a reprovar em AA.
 - **Revisar o perfil do GitHub** — 010 decidiu não linkar repositório algum nos cases e apontar só para o perfil, que passa a ser a única superfície de código que o recrutador vê. Precisa estar apresentável antes de o site ir ao ar. Pendência de execução do autor.
 - **Exportar o PDF do currículo** — versionar em `/public`. Pendência de execução.
 - **WhatsApp Business** — 009 definiu o `wa.me` como mecanismo de conversão, e o link revela o número ao abrir. Criar uma conta Business separada do número pessoal, com mensagem de ausência e horário. Pendência de execução do autor, não decisão.
