@@ -75,6 +75,6 @@ Nenhum buraco: a grade cobre B2C com pagamento, operação industrial e RH corpo
 
 Durante o grilling apareceram dois clusters temáticos — casamento (Ceremony, Feltrin) e gestão interna (Silcon, Evoluteam). Com a saída da Feltrin, o cluster de casamento deixa de existir e o agrupamento perde função. A coerência da grade agora vem da qualidade e do escopo dos três, não de tema comum. **Não tentar reconstruir esse agrupamento no layout.**
 
-### Pendência herdada por 003, 004 e 007
+### Pendência resolvida em 31/07/2026
 
-Stack de **Ceremony** e **Evoluteam** ainda não levantada (de Silcon sabe-se: Next.js, TypeScript, Tailwind, shadcn/ui, PostgreSQL). Necessária para os chips de tecnologia no card e para a seção técnica do case. Não bloqueia — é dado factual a preencher.
+As stacks dos três foram levantadas por leitura direta dos repositórios e estão registradas em [`assets/cases-rascunho.md`](../assets/cases-rascunho.md), com a sugestão de quais tecnologias virar chip no card (poucas, as que o leitor reconhece) e a stack completa observada em cada projeto.

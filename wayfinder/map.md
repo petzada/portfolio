@@ -24,7 +24,7 @@ A construção em si, o deploy e a produção da copy final são esforço separa
 - Direção visual: **`REFERENCIAS-PORTFOLIOS.md`** — light `#fafafa` por padrão com toggle dark, coluna única de ~800px, **Orbitron** (Bold/Regular) no display e **Inter** no corpo, **sem acento cromático**, motion em três famílias, sombra só no hover. O `DESIGN.md` foi **rebaixado a referência sem autoridade** por 011; não seguir suas regras.
 - Fonte de verdade da carreira: `CURRICULO.md` + LinkedIn (https://www.linkedin.com/in/petigrosso/).
 
-**Ativos.** Os projetos rodam localmente e podem ser capturados em telas reais. Existem outros projetos além dos dois listados no `CURRICULO.md` — o inventário completo ainda não está levantado.
+**Ativos.** Repositórios, todos acessíveis via `gh` na conta `petzada`: [appceremony/ceremony](https://github.com/appceremony/ceremony), [petzada/silconestoque](https://github.com/petzada/silconestoque), [petzada/evoluteam](https://github.com/petzada/evoluteam). Perfil público do autor: `petzada`. Stacks levantadas e cases redigidos em [`assets/cases-rascunho.md`](assets/cases-rascunho.md). WhatsApp Business ativo em `+55 11 97481-5782`. Capturas e retrato serão produzidos pelo autor após a conclusão do plano.
 
 **Tensão central a carregar em todo ticket.** O `DESIGN.md` é um sistema construído *em torno de screenshots de produto* ("the marketing chrome is a dark frame for the app") — e cliente de freelance compra por prova visual. Logo, a qualidade e a consistência das capturas de tela são o gargalo real deste portfólio, não o código.
 
@@ -65,10 +65,8 @@ Névoa em escopo, ainda sem nitidez para virar ticket. Graduará conforme a fron
 
 - **Metadata e compartilhamento** — title/description por rota, imagem OG (crítica: link de portfólio circula colado em WhatsApp e DM do LinkedIn), favicon, `sitemap.xml`. Depende do modelo de conteúdo e das rotas.
 - **Contraste da paleta final** — 012 fixou os valores dos dois temas a partir do protótipo v6, mas a única auditoria de contraste existente é a do research 006, feita contra uma paleta escura que foi descartada. A matriz precisa ser recalculada para os pares reais, principalmente `subtle` #949494 sobre `canvas` #fafafa, que é o candidato mais provável a reprovar em AA.
-- **Revisar o perfil do GitHub** — 010 decidiu não linkar repositório algum nos cases e apontar só para o perfil, que passa a ser a única superfície de código que o recrutador vê. Precisa estar apresentável antes de o site ir ao ar. Pendência de execução do autor.
-- **Exportar o PDF do currículo** — versionar em `/public`. Pendência de execução.
-- **WhatsApp Business** — 009 definiu o `wa.me` como mecanismo de conversão, e o link revela o número ao abrir. Criar uma conta Business separada do número pessoal, com mensagem de ausência e horário. Pendência de execução do autor, não decisão.
-- **Acesso aos repositórios** — 003 definiu que o autor dá acesso ao GitHub e ao material dos projetos para que os cases sejam redigidos. Pendência de insumo, não decisão.
+- **Exportar o PDF do currículo** — caminho já definido em 010 (`public/curriculo-marcio-petigrosso.pdf`). O autor sobe o arquivo depois de concluído o plano. Pendência de execução, não decisão.
+- **Revisão dos cases redigidos** — os três rascunhos estão em [`assets/cases-rascunho.md`](assets/cases-rascunho.md), escritos a partir da leitura dos repositórios. Precisam da revisão do autor, e uma confirmação específica: se a Silcon Ambiental pode ser citada nominalmente.
 - **Idioma** — só PT-BR, ou PT-BR + EN? Inglês A2 no currículo pesa contra manter duas versões; cliente freelance brasileiro não precisa. Revisitar depois que a oferta estiver definida.
 - **Estratégia de imagens e performance** — formato, dimensões e peso das capturas. O modo de servir já está resolvido (`standalone`, `next/image` disponível), então resta a decisão de conteúdo: quanto pesa uma captura de UI densa e como ela se comporta no 4G do lead.
 - **Registro do domínio** — qual nome, qual registrador, quanto custa. Depende do posicionamento (nome pessoal versus nome de marca/estúdio).

@@ -53,7 +53,15 @@ Link `wa.me` abrindo a conversa com texto já escrito, algo como *"Oi Marcio, vi
 
 **Implementação:** âncora comum com a mensagem em `encodeURIComponent`, `target="_blank"` e `rel="noopener noreferrer"`. Nenhuma dependência, nenhuma variável de ambiente.
 
-**Ressalva registrada:** o número não aparece escrito na página, mas é revelado assim que o link abre. O `CURRICULO.md` traz um número pessoal. Recomendação: **usar um WhatsApp Business separado do pessoal**, que além de proteger o número dá horário de atendimento, mensagem automática de ausência e catálogo. Vira pendência do autor.
+**Número confirmado pelo autor (31/07/2026):** WhatsApp Business já criado, `+55 11 97481-5782`. O link fica:
+
+```
+https://wa.me/5511974815782?text=Oi%20Marcio%2C%20vi%20seu%20portf%C3%B3lio%20e%20queria%20falar%20sobre%20um%20projeto.
+```
+
+Formato do número no `wa.me`: apenas dígitos, com código do país e sem `+`, sem espaço e sem hífen. O texto vai em `encodeURIComponent`. Guardar o número em uma constante em `content/perfil.ts`, nunca espalhado pelos componentes, já que aparece no hero e no CTA final.
+
+A pendência de criar a conta Business está **resolvida**. Segue valendo que o número é revelado ao abrir o link, o que agora é aceitável por ser conta comercial e não pessoal.
 
 ### Ação primária e posições
 

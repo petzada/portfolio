@@ -63,6 +63,10 @@ O enquadramento decidido em 008 se mantém: a experiência administrativa vive d
 
 Arquivo exportado pelo autor e versionado em `/public`, atualizado à mão quando mudar, o que acontece duas ou três vezes por ano.
 
+**Caminho definido:** `public/curriculo-marcio-petigrosso.pdf`, servido em `/curriculo-marcio-petigrosso.pdf`. O nome do arquivo importa porque é o que aparece na pasta de downloads de quem baixa: `cv.pdf` some entre outros, o nome completo é encontrável depois. A pill do hero aponta para ele com `download`.
+
+**Perfil do GitHub confirmado pelo autor (31/07/2026):** `petzada`, já revisado. A pendência de revisão está resolvida.
+
 Descartada a alternativa de uma rota `/cv` imprimível. Ela garantiria fonte de verdade única, mas custaria mais uma rota e tiraria do autor o controle da diagramação, que é justamente o que o recrutador imprime e lê.
 
 **O `CURRICULO.md` do repositório não é a fonte do PDF.** São dois artefatos independentes, e manter os dois alinhados é responsabilidade manual. Registrado para que ninguém tente automatizar isso depois achando que resolve um problema.
