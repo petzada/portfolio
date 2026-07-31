@@ -148,20 +148,13 @@ O relatório completo está em `wayfinder/assets/005-railway-deploy-research.md`
 - `tsc --noEmit` e lint limpos.
 - Nenhum texto de exemplo sobrando.
 
-## O que depende do Marcio, e trava etapas
-
-Peça no começo, não no meio:
+## O que depende do Marcio, mas não trava etapas
 
 | Pendência | Trava |
 |---|---|
 | Capturas dos três projetos (16:9 no destaque e nos cases, 16:10 nos secundários) | **não trava**: use slots até chegarem |
 | Retrato para o avatar, quadrado | **não trava**: use slot até chegar |
 | PDF do currículo em `public/curriculo-marcio-petigrosso.pdf` | **não trava**: o link pode apontar para o caminho antes do arquivo existir |
-| Revisão dos textos em `cases-para-revisao.md` | etapa 3 |
-| Decisão de metadata e imagem OG | etapa 7 |
-| Domínio registrado e acesso à Railway | etapa 9 |
-
-Só duas coisas travam de verdade: a **revisão dos textos** antes da etapa 3, e o **domínio mais o acesso à Railway** antes da etapa 9. Todo o resto pode ser construído com espaço reservado e preenchido depois.
 
 As capturas precisam ter dados de exemplo plausíveis e **dados de empresa anonimizados**: o nome Silcon Ambiental pode ser citado, mas fornecedores, valores e estoques reais não podem aparecer. O ticket 007 detalha.
 
