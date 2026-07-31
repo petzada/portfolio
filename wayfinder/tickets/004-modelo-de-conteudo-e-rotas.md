@@ -3,8 +3,8 @@ id: 004
 title: Modelo de conteúdo e rotas
 type: grilling
 mode: HITL
-status: open
-assignee:
+status: closed
+assignee: sessao-principal
 blocked_by: [002, 003]
 ---
 
@@ -29,4 +29,124 @@ Precisa fechar com:
 
 ## Resolution
 
-_(aberto)_
+**Conteúdo em objetos TypeScript tipados**, um arquivo por projeto. O conteúdo do one-pager fora dos projetos (trajetória, formação, skills, perfil) também vira dado.
+
+A razão de não usar MDX: 003 travou o case numa estrutura muito regular, com as mesmas três seções, três capturas e 250 a 350 palavras sempre. Conteúdo tão regular não precisa da liberdade do markdown, precisa de campos. Como campos, um esquecimento vira erro de compilação em vez de buraco em produção.
+
+### Os tipos
+
+```ts
+// src/lib/types.ts
+import type { StaticImageData } from 'next/image'
+
+export type Status = 'no-ar' | 'em-uso' | 'demo'
+
+export interface Captura {
+  src: StaticImageData
+  alt: string          // obrigatório, nunca opcional
+  legenda?: string
+}
+
+export interface Projeto {
+  slug: string
+  nome: string
+  frase: string                    // a mesma no card e no topo do case
+  status: Status
+  url?: string                     // só quando existe demo pública
+  stack: string[]
+  capa: Captura                    // 16:9 no destaque, 16:10 nos demais
+  apoio: [Captura, Captura]        // exatamente duas, conforme 003
+  oQueE: string
+  comoFunciona: string
+  comoFoiConstruido: string        // renderizado recolhido
+}
+
+export interface Emprego {
+  org: string
+  cargo: string
+  periodo: string                  // texto pronto: "dez 2024 · atual"
+  atual: boolean                   // governa ponto sólido ou vazado
+  descricao: string
+}
+
+export interface Formacao {
+  curso: string
+  instituicao: string
+  periodo: string
+  detalhe?: string
+}
+```
+
+**Decisões de modelagem que valem justificativa:**
+
+- **`status` é união fechada**, não string livre. Os três rótulos já apareceram no protótipo e precisam ser finitos, porque cada um tem tratamento visual definido (ponto sólido ou vazado).
+- **`destaque` foi eliminado.** Duplicaria informação que a ordem do array já carrega, e dois projetos marcados como destaque quebrariam a grade em silêncio. **O primeiro item do array é o destaque, por definição.** Estado derivado, não armazenado.
+- **`alt` é obrigatório.** Acessibilidade imposta pelo tipo, não pela boa vontade de quem edita.
+- **`apoio` é tupla de dois**, não array aberto, para que a regra de 003 seja verificada pelo compilador. Relaxar depois é trivial se o gabarito mudar.
+- **`periodo` é texto pronto**, não par de datas. A página nunca calcula nada com essas datas; formatar seria complexidade sem uso.
+
+### Estrutura de pastas, o contrato com a implementação
+
+```
+src/
+  app/
+    layout.tsx                 # fontes, tema, metadata base
+    page.tsx                   # one-pager
+    not-found.tsx
+    projetos/[slug]/page.tsx   # case
+  components/
+    hero.tsx
+    projeto-card.tsx
+    projetos-grid.tsx
+    sobre.tsx
+    trajetoria.tsx
+    formacao.tsx
+    cta.tsx
+    tema-toggle.tsx            # 'use client', o único que precisa
+  content/
+    perfil.ts                  # nome, cargo, pitch, sobre, meta, links, skills
+    trajetoria.ts              # Emprego[]
+    formacao.ts                # Formacao[]
+    projetos/
+      index.ts                 # array ordenado; a ordem É a hierarquia
+      ceremony.ts
+      silcon.ts
+      evoluteam.ts
+      img/
+        ceremony-capa.png
+        ceremony-apoio-1.png
+        ceremony-apoio-2.png
+        ...
+  lib/types.ts
+  styles/globals.css           # tokens em @theme, Tailwind v4
+```
+
+### Imagens
+
+Ficam junto do conteúdo, em `content/projetos/img/`, e entram por **import estático**. Isso dá largura e altura automáticas ao `next/image`, o que elimina layout shift sem ninguém precisar lembrar de declarar dimensão. O modo `standalone` decidido em 005 mantém a otimização de imagem ativa, então não há necessidade de `unoptimized`.
+
+Convenção de nome: `<slug>-capa.png`, `<slug>-apoio-1.png`, `<slug>-apoio-2.png`. Previsível o bastante para que a captura errada no lugar errado seja visível na revisão do arquivo.
+
+### Rotas
+
+| Rota | O que é |
+|---|---|
+| `/` | O one-pager: hero, projetos, sobre, trajetória, formação, CTA |
+| `/projetos/[slug]` | A página de case |
+
+Não há `/sobre` separada: 008 colocou sobre, trajetória e formação dentro do one-pager. Rotas em português, coerente com a página ser PT-BR.
+
+### Geração estática
+
+`generateStaticParams` deriva os slugs do array de projetos. Com `dynamicParams = false`, qualquer slug fora da lista responde 404 pelo `not-found.tsx`, sem rota dinâmica viva em produção. Todas as páginas são geradas no build; o servidor Next existe para servi-las e para otimizar imagem, não para renderizar sob demanda.
+
+### Como se adiciona o projeto número 4
+
+O teste de manutenção que motivou este ticket, em quatro passos:
+
+1. Colocar as três capturas em `content/projetos/img/` seguindo a convenção.
+2. Criar `content/projetos/<slug>.ts` copiando um existente. O TypeScript acusa qualquer campo faltando.
+3. Acrescentar o import ao array em `index.ts`, na posição que reflete a hierarquia desejada.
+4. Build. A rota do case passa a existir sozinha.
+
+Nada além disso. Nenhum componente precisa ser tocado.

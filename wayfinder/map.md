@@ -49,6 +49,8 @@ A construção em si, o deploy e a produção da copy final são esforço separa
 
 - [Anatomia da página de case](tickets/003-anatomia-da-pagina-de-case.md) — **case de produto**, não case de cliente, porque nenhum dos três projetos teve contratante. Sequência: nome, frase, meta, captura de abertura 16:9, "O que é", "Como funciona", "Como foi construído" (recolhível), fechamento com "ver no ar" e CTA. **250 a 350 palavras** e **três capturas** por case. Sem link de repositório, por segurança e adequação. **Não inventar métrica**: um case de produto termina em "veja funcionando", não em porcentagem.
 
+- [Modelo de conteúdo e rotas](tickets/004-modelo-de-conteudo-e-rotas.md) — conteúdo em **objetos TypeScript tipados**, um arquivo por projeto, mais `perfil`, `trajetoria` e `formacao` como dados. Estrutura de case regular demais para justificar MDX. Rotas: `/` e `/projetos/[slug]`, estáticas via `generateStaticParams` com `dynamicParams = false`. Imagens por import estático, junto do conteúdo. `status` é união fechada, `alt` é obrigatório, `apoio` é tupla de duas capturas, e **`destaque` foi eliminado**: o primeiro do array é o destaque, por definição. O ticket entrega a estrutura de pastas completa, que é o contrato com a implementação.
+
 **Consequência de arquitetura a carregar adiante:** o site não é "estático servido por CDN" — é SSG rodando em servidor Next dentro de um container. Muda o que **Modelo de conteúdo e rotas** (004) pode assumir, e abre a porta para `next/image` de verdade.
 
 ## Not yet specified
