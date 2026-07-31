@@ -55,13 +55,27 @@ O `REFERENCIAS` recomenda "1–2 métricas concretas por case". Isso colide com 
 
 | Ponto | Decisão |
 |---|---|
-| **Tema** | **Light por padrão, com toggle dark** — canvas claro `#fafafa`, no padrão do Anderson. Traz o toggle de volta ao escopo do mapa. |
+| **Tema** | ~~Light por padrão, com toggle dark~~ → **revisto em 31/07/2026: DARK é o padrão.** Ver abaixo. |
 | **Largura** | Coluna única centrada, ~800px, conforme o `REFERENCIAS`. Nada de grid 3-up. |
 | **Display** | **Orbitron** (Google Fonts), pesos Bold e Regular — nome, títulos de seção e nomes de projeto. |
 | **Corpo** | **Inter** — parágrafos, bullets, legendas, UI. Mantém a verificação de acentuação do research 006. |
 | **Acento cromático** | **Nenhum.** Página monocromática; a identidade vem inteiramente da tipografia e das telas dos projetos. |
 | **Motion** | Receita do `REFERENCIAS` adotada: três famílias — scroll reveal (`opacity 0→1`, `y 16–24→0`, 0.45–0.6s easeOut, `once`), stagger de lista (delay `i * 0.03–0.05`), hover de mídia (`scale 1.05` em 500ms). `prefers-reduced-motion` obrigatório. **Fecha a névoa de motion do mapa.** |
 | **Elevação** | Sem sombra permanente; sombra só no hover (`0 8px 30px rgba(0,0,0,.1)`), conforme o `REFERENCIAS`. |
+
+### Revisão do tema, 31/07/2026
+
+**Dark é o tema padrão da página.** A regra completa:
+
+1. Se o sistema do usuário declara preferência por **claro**, a página abre clara.
+2. Em qualquer outro caso, incluindo sistema em escuro e sistema sem preferência declarada, a página abre **escura**.
+3. O toggle continua existindo e permite trocar manualmente.
+
+Ou seja, o dark deixa de ser alternativa e passa a ser o estado base; o light é a exceção concedida a quem pediu explicitamente. Isso inverte o que esta seção decidiu originalmente, quando o `REFERENCIAS` venceu trazendo canvas claro por padrão.
+
+**Efeito colateral que fecha um círculo:** o research 006, feito para o sistema Linear e considerado parcialmente obsoleto quando o light venceu, volta a ter peso. A escada de superfícies derivada lá (`surface-1` #070708 até `surface-4` #18191d) é a base do tema que agora é o principal, e não mais a do tema secundário.
+
+**Consequência para a auditoria de contraste**, que segue pendente na névoa: o par a verificar primeiro deixa de ser `subtle` #949494 sobre `#fafafa` e passa a ser o conjunto do tema escuro, porque é ele que a maioria vai ver.
 
 ### A divisão tipográfica
 

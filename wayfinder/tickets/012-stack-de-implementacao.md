@@ -60,7 +60,9 @@ shadcn/ui recusado. O inventário da página é botão em pill, card, chips, tim
 
 O único ponto onde uma biblioteca resolve algo genuinamente difícil. Com SSR, o servidor não sabe o tema do visitante e a página pisca no tema errado no primeiro paint. `next-themes` injeta o script bloqueante que evita isso, e ainda cobre preferência de sistema, persistência e sincronia entre abas.
 
-Configuração: `attribute="class"`, `defaultTheme="light"` (light é o padrão por 011), `enableSystem`, e `suppressHydrationWarning` no `<html>`.
+Configuração: `attribute="class"`, **`defaultTheme="dark"`**, `enableSystem`, e `suppressHydrationWarning` no `<html>`.
+
+Essa combinação produz exatamente a regra revista em 011: com `enableSystem`, quem tem o sistema em claro recebe claro; quem tem o sistema em escuro ou não declarou preferência cai no `defaultTheme`, que é escuro. **Dark é o estado base, light é a exceção concedida a quem pediu.**
 
 ### Ícones
 

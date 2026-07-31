@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protótipo 008 v12 · larguras uniformes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+/* Tema: DARK e o padrao. So vira claro se o sistema do usuario declarar
+   preferencia por claro. Sem preferencia declarada, ou sem JS, fica escuro,
+   porque o atributo ja vem dark no <html>.
+   Roda antes do primeiro paint, que e o que evita o flash de tema errado.
+   Na implementacao isso e o next-themes com defaultTheme="dark" + enableSystem. */
+(function(){
+  try{
+    if(window.matchMedia('(prefers-color-scheme: light)').matches){
+      document.documentElement.setAttribute('data-theme','light');
+    }
+  }catch(e){}
+})();
+</script>
+<style>
+/* ============================================================
+   PROTÓTIPO DESCARTÁVEL v12, ticket 008. VERSAO FINAL.
+
+   NOVO na v12:
+   - Largura uniforme: todo bloco de texto ocupa a coluna inteira, com a
+     borda direita alinhada em todas as secoes.
+
+   Da v11:
+   - Texto corrido justificado, com hifenizacao automatica. Ver o bloco
+     "v11: TEXTO JUSTIFICADO" no fim deste style.
+
+   Da v10:
+   - Alinhamento a esquerda. A centralizacao testada na v9 foi revertida
+     por decisao do autor; a v9 fica no diretorio so como registro.
+   - A descricao abaixo do carrossel saiu: a secao Stack e so o carrossel.
+   - Ajustes de 390px preservados da v9. Ver bloco no fim deste style.
+
+   Estrutura: hero > projetos > stack > sobre mim > trajetoria > formacao > footer.
+
+   Icones Simple Icons por mask-image + currentColor: herdam a cor do texto,
+   funcionam nos dois temas e nao introduzem cor alguma, mantendo a pagina
+   monocromatica (011). Em producao, vendorizar os SVG no repo.
+
+   NOVO na v8:
+   - Stack virou carrossel horizontal automatico de uma linha, e desceu para
+     depois dos projetos. Marquee unico na pagina. Pausa no hover e para por
+     completo sob prefers-reduced-motion, virando scroll manual.
+   - CTA final removido. A pagina termina em footer com links uteis.
+     Custo registrado no ticket: contraria 009, que queria chamada no ponto
+     em que o leitor esta mais quente.
+   - Header sem a frase de pitch. "Desenvolvedor full stack" assume o peso
+     tipografico que era dela.
+   Disposicao do hero: a da v2/v4, empilhada, inspirada no Anderson.
+   Seis familias de layout distintas, uma por secao.
+   Tipografia e cor por 011. Raio unico: 12px midia, 8px controles, circulo no avatar.
+
+   ============================================================ */
+
+:root{
+  --canvas:#fafafa; --surface:#ffffff;
+  --ink:#0b0b0b; --muted:#6b6b6b; --subtle:#949494;
+  --line:#e5e5e5; --line-strong:#d4d4d4;
+  --col:800px; --pad-x:24px;
+  --r-media:12px; --r-control:8px;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+[data-theme="dark"]{
+  --canvas:#0b0b0b; --surface:#16171a;
+  --ink:#f5f5f5; --muted:#a1a1a1; --subtle:#6f7176;
+  --line:#26282d; --line-strong:#34373d;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--canvas);color:var(--ink);
+  font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.6;letter-spacing:-.01em;
+  transition:background 200ms linear,color 200ms linear}
+.display{font-family:Orbitron,system-ui,sans-serif;font-weight:700;line-height:1.06;letter-spacing:-.005em}
+
+.tools{position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+  padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+.tools__t{font-size:12px;font-weight:600;color:var(--muted);margin-right:auto}
+.tools button{font:inherit;font-size:13px;font-weight:500;padding:7px 13px;border-radius:var(--r-control);
+  border:1px solid var(--line-strong);background:var(--canvas);color:var(--ink);cursor:pointer;transition:border-color 150ms}
+.tools button:hover{border-color:var(--ink)}
+.tools button:active{transform:translateY(1px)}
+.tools button[aria-pressed="true"]{background:var(--ink);color:var(--canvas);border-color:var(--ink)}
+
+.wrap{max-width:var(--col);margin:0 auto;padding:0 var(--pad-x)}
+body.is-narrow .wrap{max-width:390px}
+body.is-narrow{--pad-x:20px}
+.page{display:none}.page.on{display:block}
+
+/* ---------- 1. hero ---------- */
+.hero{padding:80px 0 0}
+body.is-narrow .hero{padding:48px 0 0}
+.avatar{width:112px;height:112px;border-radius:50%;
+  border:1px solid var(--line-strong);background:var(--surface);
+  display:grid;place-content:center;text-align:center;font-size:11px;color:var(--subtle);line-height:1.3;
+  margin-bottom:28px}
+body.is-narrow .avatar{width:88px;height:88px}
+.name{font-size:clamp(28px,6.2vw,44px);margin:0}
+/* v8: sem a frase de pitch. O cargo assume o peso tipografico que era dela. */
+.role{font-size:22px;font-weight:500;color:var(--ink);margin:16px 0 0;letter-spacing:-.025em}
+.meta{display:flex;flex-wrap:wrap;gap:8px 16px;margin:18px 0 0;font-size:13px;color:var(--subtle)}
+.meta a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line-strong)}
+.meta a:hover{color:var(--ink);border-color:var(--ink)}
+.about{font-size:18px;line-height:1.65;color:var(--muted);max-width:60ch;margin:26px 0 0}
+.about strong{color:var(--ink);font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin:30px 0 0}
+.pill{font:inherit;font-size:13px;font-weight:600;padding:9px 16px;border-radius:999px;
+  border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);
+  text-decoration:none;white-space:nowrap;transition:border-color 150ms}
+.pill:hover{border-color:var(--ink)}
+.pill:active{transform:translateY(1px)}
+.pill--solid{background:var(--ink);color:var(--canvas);border-color:var(--ink)}
+.pill--solid:hover{opacity:.86}
+
+.label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--subtle);
+  border-bottom:1px solid var(--line);padding-bottom:10px;margin:96px 0 32px}
+body.is-narrow .label{margin:64px 0 24px}
+
+/* ---------- 3. stack: carrossel automatico de uma linha ----------
+   Marquee unico da pagina. A faixa e duplicada e transladada ate -50%,
+   o que fecha o laco sem salto visivel. */
+.marquee{
+  position:relative;overflow:hidden;
+  /* esmaece as duas bordas, para o corte nao parecer bug */
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+}
+.marquee__track{display:flex;width:max-content;gap:10px;animation:slide 46s linear infinite}
+.marquee:hover .marquee__track{animation-play-state:paused}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.tech__i{
+  display:inline-flex;align-items:center;gap:8px;flex:none;
+  border:1px solid var(--line);border-radius:var(--r-control);
+  padding:9px 14px;font-size:13px;font-weight:500;color:var(--ink);
+  background:var(--surface);
+}
+/* icone monocromatico: mask + currentColor. Nenhuma cor de marca entra na pagina. */
+.tech__i i{
+  width:15px;height:15px;flex:none;display:block;
+  background-color:currentColor;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:center;mask-position:center;
+  -webkit-mask-size:contain;mask-size:contain;
+}
+
+/* ---------- 2. projetos ---------- */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.grid .card--lead{grid-column:1 / -1}
+body.is-narrow .grid{grid-template-columns:1fr;gap:32px}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
+.card{display:block;text-decoration:none;color:inherit;cursor:pointer}
+.shot{position:relative;aspect-ratio:16/10;border-radius:var(--r-media);border:1px solid var(--line);
+  background:var(--surface);overflow:hidden;transition:box-shadow 300ms var(--ease),border-color 300ms var(--ease)}
+.card--lead .shot{aspect-ratio:16/9}
+.card:hover .shot{box-shadow:0 8px 30px rgb(0 0 0/.10);border-color:var(--line-strong)}
+[data-theme="dark"] .card:hover .shot{box-shadow:0 8px 30px rgb(0 0 0/.55)}
+.shot__in{position:absolute;inset:0;display:grid;place-content:center;text-align:center;gap:4px;
+  transition:transform 500ms var(--ease)}
+.card:hover .shot__in{transform:scale(1.05)}
+.slot{font-size:12px;color:var(--subtle)}
+.slot b{display:block;font-weight:600;color:var(--muted);font-size:13px;margin-bottom:2px}
+.card__head{display:flex;align-items:baseline;gap:10px;margin:16px 0 0}
+.card__name{font-size:16px;margin:0}
+.card--lead .card__name{font-size:20px}
+.card__desc{margin:8px 0 0;font-size:14px;color:var(--muted)}
+.card--lead .card__desc{font-size:15px;max-width:56ch}
+.status{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;
+  color:var(--muted);white-space:nowrap}
+.status i{width:6px;height:6px;border-radius:50%;background:var(--muted);display:block}
+.status--off i{background:transparent;border:1px solid var(--subtle)}
+.stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;font-size:11px;color:var(--muted)}
+.stack span{border:1px solid var(--line);border-radius:var(--r-control);padding:3px 8px}
+
+/* ---------- 3. sobre mim ---------- */
+.prose{max-width:62ch;display:grid;gap:20px}
+.prose p{margin:0;font-size:17px;line-height:1.7;color:var(--muted)}
+.prose p.lead{font-size:20px;line-height:1.55;color:var(--ink);font-weight:500;letter-spacing:-.02em}
+.prose strong{color:var(--ink);font-weight:600}
+
+.skills{display:flex;flex-wrap:wrap;gap:7px;margin-top:32px;font-size:12px;color:var(--muted)}
+.skills span{border:1px solid var(--line);border-radius:var(--r-control);padding:5px 11px}
+
+/* ---------- 4. trajetoria (timeline vertical) ---------- */
+.tl{list-style:none;margin:0;padding:0;position:relative}
+.tl::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line)}
+.tl__item{position:relative;padding:0 0 40px 34px}
+.tl__item:last-child{padding-bottom:0}
+.tl__dot{position:absolute;left:0;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--canvas);border:1px solid var(--line-strong)}
+.tl__item--now .tl__dot{background:var(--ink);border-color:var(--ink)}
+.tl__top{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.tl__org{font-size:17px;font-weight:600;margin:0;letter-spacing:-.02em}
+.tl__date{margin-left:auto;font-size:12px;color:var(--subtle);white-space:nowrap}
+body.is-narrow .tl__date{margin-left:0}
+.tl__role{margin:4px 0 0;font-size:14px;font-weight:500;color:var(--muted)}
+.tl__desc{margin:10px 0 0;font-size:14px;color:var(--muted);max-width:58ch}
+
+/* ---------- 5. formacao ---------- */
+.edu{display:grid;grid-template-columns:1.4fr 1fr;gap:36px}
+body.is-narrow .edu{grid-template-columns:1fr;gap:28px}
+@media (max-width:640px){.edu{grid-template-columns:1fr;gap:28px}}
+.edu__t{font-size:17px;font-weight:600;letter-spacing:-.02em;margin:0}
+.edu__s{margin:6px 0 0;font-size:14px;color:var(--muted)}
+.edu__d{margin:6px 0 0;font-size:12px;color:var(--subtle)}
+.edu__x{margin:12px 0 0;font-size:14px;color:var(--muted);max-width:46ch}
+
+/* ---------- 6. footer ---------- */
+.foot{margin-top:104px;padding-top:28px;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:16px 28px}
+body.is-narrow .foot{margin-top:72px}
+.foot__links{display:flex;flex-wrap:wrap;gap:8px 20px}
+.foot__links a{font-size:14px;font-weight:500;color:var(--ink);text-decoration:none;
+  border-bottom:1px solid var(--line-strong);padding-bottom:1px;transition:border-color 150ms linear}
+.foot__links a:hover{border-color:var(--ink)}
+.foot__c{margin:0;margin-left:auto;font-size:12px;color:var(--subtle)}
+body.is-narrow .foot__c{margin-left:0}
+
+/* ---------- case ---------- */
+.back{display:inline-flex;align-items:center;gap:7px;margin:32px 0 0;font-size:13px;font-weight:600;
+  color:var(--muted);text-decoration:none;cursor:pointer;background:none;border:0;font-family:inherit}
+.back:hover{color:var(--ink)}
+.case__head{padding:28px 0 0}
+.case__name{font-size:clamp(23px,5.2vw,34px);margin:0}
+.case__line{font-size:19px;color:var(--muted);margin:14px 0 0;max-width:52ch}
+.case__meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin:22px 0 0;font-size:13px;color:var(--subtle)}
+.shot--hero{aspect-ratio:16/9;margin-top:36px}
+.shot--wide{aspect-ratio:16/9;margin-top:20px}
+.case__body{margin-top:56px;display:grid;gap:40px}
+.case__body h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--subtle);margin:0 0 12px}
+.case__body p{margin:0;color:var(--muted);max-width:62ch}
+
+.reveal{opacity:0;transform:translateY(20px)}
+.reveal.in{opacity:1;transform:none;transition:opacity 550ms var(--ease),transform 550ms var(--ease)}
+@media (prefers-reduced-motion:reduce){
+  .reveal,.reveal.in{opacity:1;transform:none;transition:none}
+  .shot__in,.card:hover .shot__in{transition:none;transform:none}
+  /* o carrossel para de vez e vira faixa rolavel a mao */
+  .marquee__track{animation:none}
+  .marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+}
+footer.end{padding:110px 0}
+
+/* ============================================================
+   v10: AJUSTES DE 390px
+   Onde o layout apertava no telefone. A centralizacao testada na v9 foi
+   revertida: a pagina volta ao alinhamento a esquerda.
+   ============================================================ */
+
+body.is-narrow .name{font-size:30px}
+body.is-narrow .role{font-size:19px}
+body.is-narrow .about{font-size:17px}
+body.is-narrow .prose p.lead{font-size:19px}
+body.is-narrow .meta{gap:6px 12px}
+
+/* nome e status do card, e organizacao e data da trajetoria, empilham em vez
+   de espremer lado a lado. O status perde o empurrao para a direita. */
+body.is-narrow .tl__top,
+body.is-narrow .card__head{flex-direction:column;align-items:flex-start;gap:5px}
+body.is-narrow .status{margin-left:0}
+@media (max-width:640px){
+  .tl__top,.card__head{flex-direction:column;align-items:flex-start;gap:5px}
+  .status{margin-left:0}
+}
+
+/* o e-mail e a string mais longa da pagina: nunca deixar estourar */
+.meta a,.foot__links a{overflow-wrap:anywhere}
+
+/* ============================================================
+   v11: TEXTO JUSTIFICADO
+   Aplicado so a texto corrido. Frase de destaque, titulos e legendas
+   ficam de fora: justificar duas linhas espalha palavra, nao alinha nada.
+
+   hyphens:auto e obrigatorio aqui, nao enfeite. Sem hifenizacao, justificar
+   uma coluna estreita em portugues abre rios de espaco branco entre as
+   palavras. O <html lang="pt-BR"> e o que faz o navegador hifenizar certo.
+   ============================================================ */
+.about,
+.prose p,
+.card__desc,
+.tl__desc,
+.edu__x,
+.case__body p{
+  text-align:justify;
+  text-justify:inter-word;
+  -webkit-hyphens:auto;hyphens:auto;
+}
+/* a frase de abertura do Sobre mim continua alinhada a esquerda */
+.prose p.lead{text-align:left;hyphens:manual}
+
+/* ============================================================
+   v12: LARGURA UNIFORME
+   Cada bloco de texto tinha a propria largura maxima (60ch, 62ch, 58ch,
+   56ch, 46ch), entao a borda direita mudava de secao para secao e a
+   pagina nao lia como um bloco unico. Todos passam a ocupar a largura
+   inteira da coluna: borda direita alinhada em toda a pagina.
+
+   A estrutura nao muda. Avatar segue a esquerda, grid segue 2-up,
+   timeline segue com a linha lateral, alinhamento segue a esquerda.
+   ============================================================ */
+.about,
+.prose,
+.card--lead .card__desc,
+.tl__desc,
+.edu__x,
+.case__line,
+.case__body p{max-width:none}
+</style>
+</head>
+<body>
+
+<div class="tools">
+  <span class="tools__t">Protótipo 008 v12</span>
+  <button id="nav" aria-pressed="false">Ver página de case</button>
+  <button id="theme">Trocar tema</button>
+  <button id="narrow" aria-pressed="false">Ver em 390px</button>
+</div>
+
+<div class="page on" id="home">
+
+<!-- ============ 1. HERO ============ -->
+<section class="wrap hero reveal">
+  <div class="avatar">foto<br>112px</div>
+  <h1 class="display name">MARCIO<br>PETIGROSSO</h1>
+  <p class="role">Desenvolvedor full stack</p>
+  <div class="meta">
+    <span>Mauá, SP</span>
+    <a href="#">marciopetigrosso@gmail.com</a>
+  </div>
+  <p class="about">
+    Construo aplicações web completas, do banco de dados ao deploy, com
+    <strong>Next.js, TypeScript, Node e PostgreSQL</strong>. Já entreguei uma plataforma de pagamento por
+    PIX, um sistema de estoque industrial e uma ferramenta de avaliação de desempenho. Setores diferentes,
+    mesmo trabalho: entender o problema e devolver ele resolvido.
+  </p>
+  <div class="actions">
+    <a class="pill pill--solid" href="#">Pedir um orçamento</a>
+    <a class="pill" href="#">LinkedIn</a>
+    <a class="pill" href="#">GitHub</a>
+    <a class="pill" href="#">Baixar CV</a>
+  </div>
+</section>
+
+<!-- ============ 2. PROJETOS ============ -->
+<section class="wrap">
+  <p class="label">Projetos</p>
+  <div class="grid">
+
+    <a class="card card--lead reveal" data-go="case">
+      <div class="shot"><div class="shot__in">
+        <span class="slot"><b>captura do Ceremony</b>1920 × 1080, lista de presentes</span>
+      </div></div>
+      <div class="card__head">
+        <h3 class="display card__name">CEREMONY</h3>
+        <span class="status"><i></i>no ar</span>
+      </div>
+      <p class="card__desc">Os convidados presenteiam por PIX e o casal recebe na hora, sem plataforma segurando o dinheiro por semanas.</p>
+      <div class="stack"><span>Next.js</span><span>TypeScript</span><span>PIX</span></div>
+    </a>
+
+    <a class="card reveal" data-go="case">
+      <div class="shot"><div class="shot__in">
+        <span class="slot"><b>captura do Silcon</b>1600 × 1000</span>
+      </div></div>
+      <div class="card__head">
+        <h3 class="display card__name">SILCON</h3>
+        <span class="status"><i></i>em uso</span>
+      </div>
+      <p class="card__desc">O almoxarifado sabe o que está acabando antes de faltar na linha.</p>
+      <div class="stack"><span>Next.js</span><span>PostgreSQL</span></div>
+    </a>
+
+    <a class="card reveal" data-go="case">
+      <div class="shot"><div class="shot__in">
+        <span class="slot"><b>captura do Evoluteam</b>1600 × 1000</span>
+      </div></div>
+      <div class="card__head">
+        <h3 class="display card__name">EVOLUTEAM</h3>
+        <span class="status status--off"><i></i>demo</span>
+      </div>
+      <p class="card__desc">Avaliação de desempenho e PDI com histórico, fora da planilha compartilhada.</p>
+      <div class="stack"><span>stack a confirmar</span></div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ============ 3. STACK, carrossel ============ -->
+<section class="wrap">
+  <p class="label">Stack</p>
+  <div class="marquee reveal" aria-label="Tecnologias que uso">
+    <div class="marquee__track">
+      <!-- faixa A -->
+      <span class="tech__i"><i data-icon="nextdotjs"></i>Next.js</span>
+      <span class="tech__i"><i data-icon="react"></i>React</span>
+      <span class="tech__i"><i data-icon="typescript"></i>TypeScript</span>
+      <span class="tech__i"><i data-icon="tailwindcss"></i>Tailwind CSS</span>
+      <span class="tech__i"><i data-icon="nodedotjs"></i>Node.js</span>
+      <span class="tech__i"><i data-icon="postgresql"></i>PostgreSQL</span>
+      <span class="tech__i"><i data-icon="supabase"></i>Supabase</span>
+      <span class="tech__i"><i data-icon="zod"></i>Zod</span>
+      <span class="tech__i"><i data-icon="pix"></i>PIX</span>
+      <span class="tech__i"><i data-icon="vitest"></i>Vitest</span>
+      <span class="tech__i"><i data-icon="sentry"></i>Sentry</span>
+      <span class="tech__i"><i data-icon="resend"></i>Resend</span>
+      <span class="tech__i"><i data-icon="git"></i>Git</span>
+      <span class="tech__i"><i data-icon="railway"></i>Railway</span>
+      <!-- faixa B, copia exata: fecha o laco sem salto. aria-hidden para nao duplicar na leitura -->
+      <span class="tech__i" aria-hidden="true"><i data-icon="nextdotjs"></i>Next.js</span>
+      <span class="tech__i" aria-hidden="true"><i data-icon="react"></i>React</span>
+      <span class="tech__i" aria-hidden="true"><i data-icon="typescript"></i>TypeScript</span>
+      <span class="tech__i" aria-hidden="true"><i data-icon="tailwindcss"></i>Tailwind CSS</span>
+      <span class="tech__i" aria-hidden="true"><i data-icon="nodedotjs"></i>Node.js</span>
+      <span class="tech__i" aria-hidden="true"><i data-icon="postgresql"></i>PostgreSQL</span>
+      <span class="tech__i" aria-hidden="true"><i data-icon="supabase"></i>Supabase</span>
+      <span class="tech__i" aria-hidden="true"><i data-icon="zod"></i>Zod</span>
+      <span class="tech__i" aria-hidden="true"><i data-icon="pix"></i>PIX</span>
+      <span class="tech__i" aria-hidden="true"><i data-icon="vitest"></i>Vitest</span>
+      <span class="tech__i" aria-hidden="true"><i data-icon="sentry"></i>Sentry</span>
+      <span class="tech__i" aria-hidden="true"><i data-icon="resend"></i>Resend</span>
+      <span class="tech__i" aria-hidden="true"><i data-icon="git"></i>Git</span>
+      <span class="tech__i" aria-hidden="true"><i data-icon="railway"></i>Railway</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. SOBRE MIM ============ -->
+<section class="wrap">
+  <p class="label">Sobre mim</p>
+  <div class="prose reveal">
+    <p class="lead">Sou desenvolvedor full stack. Meu trabalho é pegar um problema de negócio e devolver ele resolvido em software.</p>
+    <p>
+      Cuido do ciclo inteiro: modelo os dados, escrevo o servidor, construo a interface e coloco no ar.
+      Não entrego uma parte e passo o resto adiante.
+    </p>
+    <p>
+      A parte que decide se um sistema funciona costuma ser a que ninguém vê. No <strong>Ceremony</strong>,
+      o pagamento por PIX entra por webhook assinado do provedor, com monitoramento de erro rodando em
+      produção. No <strong>Evoluteam</strong>, cada empresa tem os próprios dados isolados dentro do mesmo
+      banco. No <strong>Silcon</strong>, a atualização de saldo do estoque vive em gatilhos no Postgres e
+      não na aplicação, para que nenhuma movimentação registrada consiga deixar o estoque inconsistente.
+    </p>
+    <p>
+      Escrevo teste onde errar sai caro, de unidade a ponta a ponta, e mantenho verificação automática
+      contra o ambiente de produção. Sistema que mexe com dinheiro ou com o estoque de uma operação não
+      pode quebrar em silêncio.
+    </p>
+    <p>
+      Os três projetos são de setores que não conversam entre si, e isso é de propósito. O que se repete
+      não é o domínio, é o método: entender como o processo funciona de verdade, modelar os dados em cima
+      disso e só então desenhar a tela. Software que ignora essa ordem vira o sistema que ninguém usa.
+    </p>
+    <p>
+      Antes de programar profissionalmente atuei em operação e administração, o que me deixou confortável
+      para sentar com quem vai usar o sistema, e não só com quem vai mantê-lo.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 5. TRAJETÓRIA ============ -->
+<section class="wrap">
+  <p class="label">Trajetória</p>
+  <ol class="tl">
+
+    <li class="tl__item tl__item--now reveal">
+      <span class="tl__dot"></span>
+      <div class="tl__top">
+        <h3 class="tl__org">Silcon Sustech Ecosystem</h3>
+        <span class="tl__date">dez 2024 · atual</span>
+      </div>
+      <p class="tl__role">Assistente administrativo</p>
+      <p class="tl__desc">Compras, estoque e custos de uma operação industrial. Foi o problema daqui que virou o sistema de almoxarifado que está em uso hoje.</p>
+    </li>
+
+    <li class="tl__item reveal">
+      <span class="tl__dot"></span>
+      <div class="tl__top">
+        <h3 class="tl__org">Gerenciamento Amb Tech Lix</h3>
+        <span class="tl__date">mai 2024 · set 2024</span>
+      </div>
+      <p class="tl__role">Assistente operacional</p>
+      <p class="tl__desc">Cronogramas, equipe de apoio e otimização de fluxos logísticos para reduzir custo de coleta.</p>
+    </li>
+
+  </ol>
+</section>
+
+<!-- ============ 6. FORMAÇÃO ============ -->
+<section class="wrap">
+  <p class="label">Formação</p>
+  <div class="edu reveal">
+    <div>
+      <h3 class="edu__t">Análise e Desenvolvimento de Sistemas</h3>
+      <p class="edu__s">Faculdade SENAI Armando de Arruda Pereira</p>
+      <p class="edu__d">jan 2025 · dez 2026</p>
+      <p class="edu__x">Banco de dados, engenharia de software, frontend, backend, redes, ciência de dados e inteligência artificial.</p>
+    </div>
+    <div>
+      <h3 class="edu__t">Idiomas</h3>
+      <p class="edu__s">Português, nativo</p>
+      <p class="edu__s">Inglês, básico</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. FOOTER ============ -->
+<section class="wrap">
+  <footer class="foot reveal">
+    <nav class="foot__links">
+      <a href="https://wa.me/5511974815782?text=Oi%20Marcio%2C%20vi%20seu%20portf%C3%B3lio%20e%20queria%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a href="https://www.linkedin.com/in/petigrosso/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://github.com/petzada" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="#">E-mail</a>
+      <a href="/curriculo-marcio-petigrosso.pdf" download>Currículo</a>
+    </nav>
+    <p class="foot__c">Marcio Petigrosso · Mauá, SP · 2026</p>
+  </footer>
+</section>
+
+<footer class="end"></footer>
+</div>
+
+<!-- ============ CASE ============ -->
+<div class="page" id="case">
+<section class="wrap">
+  <button class="back" data-go="home">voltar</button>
+  <div class="case__head reveal">
+    <h1 class="display case__name">CEREMONY</h1>
+    <p class="case__line">Os convidados presenteiam por PIX e o casal recebe na hora, sem plataforma segurando o dinheiro por semanas.</p>
+    <div class="case__meta">
+      <span>No ar em ceremony.com.br</span>
+      <span>Next.js, TypeScript, PIX</span>
+    </div>
+  </div>
+  <div class="shot shot--hero reveal"><div class="shot__in">
+    <span class="slot"><b>captura principal do Ceremony</b>1920 × 1080, a tela que melhor vende o produto</span>
+  </div></div>
+  <div class="case__body">
+    <div class="reveal">
+      <h3>O problema</h3>
+      <p>A lista de casamento tradicional obriga o convidado a comprar um objeto de loja e o casal a receber o que não escolheu. As plataformas que resolvem isso costumam reter o dinheiro por semanas.</p>
+    </div>
+    <div class="shot shot--wide reveal"><div class="shot__in">
+      <span class="slot"><b>captura secundária</b>fluxo de presente ou painel do casal</span>
+    </div></div>
+    <div class="reveal">
+      <h3>O que foi construído</h3>
+      <p>Placeholder. As seções do case são definidas pelo ticket 003. Aqui só o esqueleto, para julgar a proporção da captura grande e o ritmo da leitura.</p>
+    </div>
+    <div class="reveal">
+      <h3>Decisões técnicas</h3>
+      <p>Placeholder. Seção candidata a ficar recolhida, já que o leitor primário é cliente e o secundário é tech lead.</p>
+    </div>
+  </div>
+</section>
+<footer class="end"></footer>
+</div>
+
+<script>
+(function(){
+  var body=document.body,root=document.documentElement;
+  var pages={home:document.getElementById('home'),case:document.getElementById('case')};
+  var navBtn=document.getElementById('nav');
+  function show(id){
+    for(var k in pages) pages[k].classList.toggle('on',k===id);
+    navBtn.textContent=id==='home'?'Ver página de case':'Voltar para a home';
+    navBtn.setAttribute('aria-pressed',String(id!=='home'));
+    window.scrollTo(0,0); observe();
+  }
+  navBtn.addEventListener('click',function(){show(pages.home.classList.contains('on')?'case':'home')});
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-go]'); if(t){e.preventDefault();show(t.getAttribute('data-go'))}
+  });
+  document.getElementById('theme').addEventListener('click',function(){
+    var d=root.getAttribute('data-theme')==='dark';
+    root.setAttribute('data-theme',d?'light':'dark');
+    this.setAttribute('aria-pressed',String(d));
+  });
+  document.getElementById('narrow').addEventListener('click',function(){
+    var on=body.classList.toggle('is-narrow');
+    this.setAttribute('aria-pressed',String(on));
+    this.textContent=on?'Ver em desktop':'Ver em 390px';
+  });
+  // Icones de tecnologia via Simple Icons, aplicados como mask para herdarem
+  // currentColor. Em producao, vendorizar os SVG no repo em vez de usar CDN.
+  document.querySelectorAll('[data-icon]').forEach(function(el){
+    var u='url(https://cdn.simpleicons.org/'+el.getAttribute('data-icon')+')';
+    el.style.webkitMaskImage=u; el.style.maskImage=u;
+  });
+
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var io=(!reduce&&'IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+  },{threshold:.12}):null;
+  function observe(){
+    document.querySelectorAll('.page.on .reveal').forEach(function(el){
+      if(!io){el.classList.add('in');return}
+      if(!el.classList.contains('in')) io.observe(el);
+    });
+  }
+  observe();
+})();
+</script>
+</body>
+</html>

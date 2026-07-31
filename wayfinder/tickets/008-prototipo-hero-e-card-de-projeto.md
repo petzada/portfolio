@@ -40,9 +40,17 @@ Consultar a skill `design-taste-frontend`. Salvar em `wayfinder/assets/` e apont
 
 ## Resolution
 
-**Referência final aprovada: [`wayfinder/assets/008-prototipo-v10.html`](../assets/008-prototipo-v10.html).** As anteriores (`v1` a `v9`) ficam no diretório como registro do caminho, mas apenas a v10 vale.
+**Referência final aprovada: [`wayfinder/assets/008-prototipo-v12.html`](../assets/008-prototipo-v12.html).** As anteriores (`v1` a `v11`) ficam no diretório como registro do caminho, mas apenas a v12 vale.
 
-**Fechamento em 31/07/2026 (v10):**
+**Fechamento em 31/07/2026 (v11 e v12):**
+
+- **Texto corrido justificado, com hifenização automática.** A hifenização não é enfeite: sem ela, justificar uma coluna estreita em português abre rios de espaço entre palavras. O `lang="pt-BR"` no `<html>` é o que faz o navegador hifenizar corretamente. Ficam de fora a frase de abertura do "Sobre mim", títulos e legendas, porque justificar duas linhas espalha palavra em vez de alinhar.
+- **Largura uniforme.** Cada bloco de texto tinha a própria largura máxima (60, 62, 58, 56 e 46 caracteres), o que fazia a borda direita mudar de seção para seção e a página não ler como um bloco único. Todos passaram a ocupar a largura inteira da coluna. Custo conhecido e aceito: a linha vai para cerca de 95 caracteres, acima do confortável para leitura corrida, mitigado pelo justificado com hifenização.
+- **Dark é o tema padrão.** Só abre claro se o sistema do usuário declarar preferência por claro; sem preferência declarada, ou com o sistema em escuro, prevalece o escuro. Inverte o que 011 tinha decidido, e está registrado lá.
+
+**Tentativa descartada no caminho:** uma versão intermediária centrou cada bloco de texto dentro da coluna (`margin-inline: auto`). Foi rejeitada de imediato pelo autor, com razão: centrar caixas de larguras diferentes deixa cada parágrafo flutuando num eixo próprio e piora justamente o alinhamento que se queria corrigir. O problema real era a diferença de largura entre blocos, não a posição deles.
+
+**Da v10:**
 
 - **Alinhamento à esquerda.** A página inteira centralizada foi testada na v9 e **revertida por decisão do autor**. A v9 fica no diretório apenas como registro do experimento, junto com a variante centrada da timeline que ela exigia.
 - **A descrição abaixo do carrossel saiu.** A seção Stack é só o carrossel.
