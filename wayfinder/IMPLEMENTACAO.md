@@ -26,6 +26,16 @@ Os demais tickets valem quando a dúvida cair no assunto deles. `REFERENCIAS-POR
 - **Não inventar conteúdo.** Nenhum texto novo sobre Marcio, nenhum número, nenhuma métrica, nenhum depoimento. O que não existe em `cases-para-revisao.md` ou no protótipo não vai para a página.
 - **Nada de placeholder que pareça real.** Onde faltar imagem, deixe um slot claramente marcado, como o protótipo faz. Nunca desenhe telas falsas em `<div>`.
 - **Uma etapa por vez**, na ordem abaixo. Ao terminar cada uma, mostre o resultado e espere confirmação antes da seguinte.
+- **Não instalar nada que não esteja no ticket 012.** Sem analytics, sem CMS, sem biblioteca de componentes, sem biblioteca de ícones de interface. O projeto **não tem variáveis de ambiente**: é conteúdo versionado, sem backend próprio e sem chave de API.
+- **`<html lang="pt-BR">` é obrigatório.** Não é detalhe de acessibilidade apenas: a hifenização automática do texto justificado depende dele. Sem o atributo, o navegador não hifeniza e o justificado abre rios de espaço branco.
+
+## Ordem das seções da home
+
+Fixada pelo ticket 008 e visível no protótipo. Não reordenar:
+
+`Hero` → `Projetos` → `Stack` (carrossel) → `Sobre mim` → `Trajetória` → `Formação` → `Footer`
+
+Não existe banner de CTA no fim. A página termina no rodapé.
 
 ## Etapas
 
@@ -35,7 +45,9 @@ Criar o projeto Next.js com App Router, TypeScript e Tailwind v4, e montar a est
 
 Configurar `output: 'standalone'` no `next.config`, decidido em 005 por causa da Railway.
 
-**Pronto quando:** `npm run dev` sobe, `tsc --noEmit` passa, e a árvore de pastas bate com a do ticket 004.
+Configurar também o ferramental definido em 012: ESLint com `eslint-config-next`, Prettier e `prettier-plugin-tailwindcss` para ordenação determinística de classes. Adicionar script de `typecheck` (`tsc --noEmit`). **Sem suíte de testes**, decidido em 012: uma página de conteúdo sem lógica de negócio não tem o que testar em unidade, e a rede de segurança é o type-check mais o lint.
+
+**Pronto quando:** `npm run dev` sobe, `tsc --noEmit` e o lint passam, e a árvore de pastas bate com a do ticket 004.
 
 ### 2. Tokens, fontes e tema
 
@@ -49,7 +61,19 @@ Sistema de raio: 12px mídia e cards, 8px controles, círculo em avatar e pills.
 
 ### 3. Conteúdo como dado
 
-Criar `lib/types.ts` com os tipos do ticket 004, sem alterações. Depois preencher `content/perfil.ts`, `content/trajetoria.ts`, `content/formacao.ts` e os três arquivos de projeto, com os textos de `cases-para-revisao.md` e do protótipo.
+Criar `lib/types.ts` com os tipos do ticket 004, sem alterações. Depois preencher `content/perfil.ts`, `content/trajetoria.ts`, `content/formacao.ts` e os três arquivos de projeto.
+
+**De onde vem cada texto:**
+
+| Conteúdo | Fonte |
+|---|---|
+| Nome, cargo, meta, parágrafo do hero | protótipo v12 |
+| "Sobre mim", cinco parágrafos | protótipo v12 |
+| Trajetória e formação | protótipo v12, conferindo com `CURRICULO.md` |
+| Frase, "O que é", "Como funciona", "Como foi construído" de cada projeto | `cases-para-revisao.md` |
+| Chips de stack do card e do carrossel | `cases-para-revisao.md` e protótipo v12 |
+
+Os textos do protótipo estão aprovados pelo autor, mas **não passaram por revisão final de copy**. Se encontrar erro de português ou frase que não fecha, aponte em vez de corrigir sozinho.
 
 Atenção a três coisas que o ticket 004 exige: `status` é união fechada, `alt` é obrigatório, e **não existe campo `destaque`** — o primeiro item do array é o destaque, por definição.
 
@@ -66,11 +90,13 @@ Pontos de atenção, todos verificáveis no protótipo:
 - **Grade:** o primeiro projeto ocupa a largura inteira, os outros dois ficam 2-up. Três itens, três células, sem vão.
 - **Status sem cor:** ponto preenchido para ativo, contornado e vazado para inativo. Mesma gramática na timeline.
 - **Carrossel:** faixa duplicada transladada até `-50%`, com a cópia em `aria-hidden`. CSS puro, não Motion. Pausa no hover; sob `prefers-reduced-motion` a animação para e a faixa vira scroll manual.
-- **Ícones de tecnologia:** SVGs do Simple Icons **vendorizados no repositório**, aplicados como `mask-image` com `background-color: currentColor`. Nunca como `<img>`, que traria a cor da marca e quebraria a página monocromática.
+- **Ícones de tecnologia:** SVGs do Simple Icons **vendorizados no repositório**, aplicados como `mask-image` com `background-color: currentColor`. Nunca como `<img>`, que traria a cor da marca e quebraria a página monocromática. São quatorze, todos com slug verificado: `nextdotjs`, `react`, `typescript`, `tailwindcss`, `nodedotjs`, `postgresql`, `supabase`, `zod`, `pix`, `vitest`, `sentry`, `resend`, `git`, `railway`. **Playwright não existe no Simple Icons** (verificado, retorna 404); não procure, ele fica só em texto.
 - **Texto:** corrido é justificado com `hyphens: auto`; frase de destaque, títulos e legendas ficam fora. Todos os blocos ocupam a largura inteira da coluna, sem largura máxima própria.
 - **Sem dividers** entre seções. A separação é só espaço vertical.
 
-**Pronto quando:** a home renderiza igual ao protótipo nos dois temas, em desktop e em 390px.
+**Sobre as imagens que ainda não existem:** as capturas e o retrato **não travam esta etapa**. Construa os componentes com os mesmos slots rotulados que o protótipo usa, nas proporções corretas (16:9 no destaque e nos cases, 16:10 nos secundários, quadrado no avatar). Quando os arquivos chegarem, trocar o slot pelo `next/image` com import estático é mecânico. **Não use foto de banco de imagens nem gere imagem alguma** para preencher.
+
+**Pronto quando:** a home renderiza igual ao protótipo nos dois temas, em desktop e em 390px, com os slots no lugar das imagens.
 
 ### 5. Página de case
 
@@ -128,12 +154,14 @@ Peça no começo, não no meio:
 
 | Pendência | Trava |
 |---|---|
-| Capturas dos três projetos (16:9 no destaque e nos cases, 16:10 nos secundários) | etapas 4 e 5 |
-| Retrato para o avatar, quadrado | etapa 4 |
-| PDF do currículo em `public/curriculo-marcio-petigrosso.pdf` | etapa 4 |
+| Capturas dos três projetos (16:9 no destaque e nos cases, 16:10 nos secundários) | **não trava**: use slots até chegarem |
+| Retrato para o avatar, quadrado | **não trava**: use slot até chegar |
+| PDF do currículo em `public/curriculo-marcio-petigrosso.pdf` | **não trava**: o link pode apontar para o caminho antes do arquivo existir |
 | Revisão dos textos em `cases-para-revisao.md` | etapa 3 |
 | Decisão de metadata e imagem OG | etapa 7 |
 | Domínio registrado e acesso à Railway | etapa 9 |
+
+Só duas coisas travam de verdade: a **revisão dos textos** antes da etapa 3, e o **domínio mais o acesso à Railway** antes da etapa 9. Todo o resto pode ser construído com espaço reservado e preenchido depois.
 
 As capturas precisam ter dados de exemplo plausíveis e **dados de empresa anonimizados**: o nome Silcon Ambiental pode ser citado, mas fornecedores, valores e estoques reais não podem aparecer. O ticket 007 detalha.
 
