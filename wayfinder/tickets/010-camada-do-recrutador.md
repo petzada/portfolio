@@ -3,8 +3,8 @@ id: 010
 title: Camada do recrutador
 type: grilling
 mode: HITL
-status: open
-assignee:
+status: closed
+assignee: sessao-principal
 blocked_by: [001]
 ---
 
@@ -45,4 +45,48 @@ Precisa fechar com:
 
 ## Resolution
 
-_(aberto)_
+A maior parte deste ticket foi resolvida por 008, ao aprovar o protótipo v6. O que segue consolida o conjunto e decide o que restava.
+
+### O mecanismo de separação, construído
+
+Não há página separada nem seção espremida. O recrutador é atendido por três seções próprias no fim do one-pager, depois dos projetos:
+
+- **Sobre mim**, com a narrativa profissional e os chips de stack.
+- **Trajetória**, timeline vertical apenas com os empregos.
+- **Formação**, seção própria, em duas colunas (curso e idiomas), com o período **em andamento visível**.
+
+Mais a pill **LinkedIn** no hero, que é o canal secundário de contato, distinto do WhatsApp que 009 definiu para o cliente.
+
+O enquadramento decidido em 008 se mantém: a experiência administrativa vive do lado **cliente** da narrativa, como razão pela qual ele entende a operação, e não como conteúdo de currículo. Mas o eixo da copy é a capacidade de desenvolvimento; a origem é a última frase, não a tese.
+
+### Currículo baixável: PDF estático
+
+Arquivo exportado pelo autor e versionado em `/public`, atualizado à mão quando mudar, o que acontece duas ou três vezes por ano.
+
+Descartada a alternativa de uma rota `/cv` imprimível. Ela garantiria fonte de verdade única, mas custaria mais uma rota e tiraria do autor o controle da diagramação, que é justamente o que o recrutador imprime e lê.
+
+**O `CURRICULO.md` do repositório não é a fonte do PDF.** São dois artefatos independentes, e manter os dois alinhados é responsabilidade manual. Registrado para que ninguém tente automatizar isso depois achando que resolve um problema.
+
+### O lugar do código: apenas o perfil do GitHub
+
+003 decidiu que nenhum case linka repositório, por razões de segurança e adequação, o que retirava do recrutador o artefato que ele mais procura. A decisão aqui é **não substituir esse artefato**: a pill de GitHub no hero aponta para o perfil, e pronto.
+
+Foram consideradas e descartadas a publicação do repositório deste próprio portfólio como amostra de código, e a criação de um repositório de vitrine. Ambas dariam ao tech lead algo concreto para ler; ambas foram recusadas em favor da simplicidade.
+
+**Consequência que fica registrada:** o perfil do GitHub passa a ser uma superfície de avaliação **não curada**. O recrutador vai clicar e tirar conclusões do que encontrar, seja lá o que for. Se o perfil estiver vazio, com repositórios abandonados ou sem README, o link trabalha contra a página em vez de a favor. Isso vira pendência de execução: revisar o perfil antes de publicar o site.
+
+### O que da carreira aparece, e o que não
+
+| Item | Na página |
+|---|---|
+| Empregos (Silcon, Amb Tech Lix) | sim, na timeline |
+| Formação SENAI, com período em andamento | sim, seção própria |
+| Idiomas | sim, ao lado da formação |
+| Stack técnica | sim, chips no bloco Sobre mim |
+| Currículo em PDF | sim, pill no hero |
+| LinkedIn | sim, pill no hero |
+| Código dos projetos | não |
+
+### Risco herdado, não resolvido aqui
+
+008 registrou que a seção Trajetória, isolada da formação, exibe dois cargos administrativos e nenhum de desenvolvimento, logo após um "sobre mim" que afirma o contrário. O autor optou conscientemente por manter. A costura que impede a leitura de contradição é a frase final da entrada da Silcon, ligando o emprego ao sistema que ele construiu. Continua valendo.
