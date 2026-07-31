@@ -48,7 +48,7 @@ O enquadramento de produto contorna isso sem mentir: não promete resultado de c
 7. Captura de apoio
 8. **Como funciona**: o fluxo principal, ponta a ponta
 9. Captura de apoio
-10. **Como foi construído**: stack, arquitetura, decisões. **Recolhível**, porque o leitor primário é cliente e o secundário é tech lead
+10. **Como foi construído**: stack, arquitetura, decisões. **Recolhível**, porque o leitor primário é cliente e o secundário é tech lead. **Registro técnico** (definido em 31/07/2026): enquanto "O que é" e "Como funciona" falam com o cliente em português comum, esta seção fala com recrutador e tech lead em linguagem técnica, e fecha com uma linha `Stack:` enumerada para quem escaneia por palavra-chave. **Nenhum provedor ou serviço é nomeado**: descreve-se a técnica, não o fornecedor. Supabase aparece como PostgreSQL e Row Level Security
 11. Fechamento: "ver no ar" quando existir, mais CTA de orçamento
 
 ### Extensão: 250 a 350 palavras por case

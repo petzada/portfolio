@@ -17,7 +17,7 @@ Os convidados presenteiam por PIX e o casal recebe direto, sem plataforma segura
 
 Plataforma de sites de casamento. O casal monta e publica um site com convite, confirmação de presença e lista de presentes, e recebe os presentes por PIX na própria conta.
 
-O modelo é freemium: publicar não custa nada, e a plataforma se sustenta por uma taxa sobre os presentes recebidos. Cada usuário tem um site, e a regra vale mesmo depois do casamento: enquanto existir um site, não se cria outro.
+O modelo é freemium: publicar não custa nada, e a plataforma se sustenta por uma taxa sobre os presentes recebidos. Cada usuário tem um site e pode receber seus presentes criativos ou lista selecionada em PIX.
 
 ### Como funciona
 
@@ -33,11 +33,15 @@ O site tem prazo de vida e expira sessenta dias depois da data do casamento. Se 
 
 ### Como foi construído
 
-Next.js 16 com App Router e React 19, TypeScript e Tailwind. Supabase para banco Postgres e autenticação.
+Aplicação **Next.js 16** com App Router, **React 19** com Server Components e **TypeScript** em modo estrito, estilizada com **Tailwind CSS**. O servidor roda em **Node.js**.
 
-O pagamento chega por webhook assinado do provedor de PIX, com verificação de assinatura antes de qualquer escrita. As fotos do casal vão para armazenamento S3-compatível por URL pré-assinada, com recorte feito no navegador antes do upload. Os e-mails são escritos como componentes e entregues por Resend. Sentry acompanha erro e sessão em produção.
+A persistência é **PostgreSQL**, com schema versionado em migrations e políticas de acesso aplicadas no próprio banco por Row Level Security. Autenticação com sessão validada no servidor.
 
-Os testes cobrem unidade, integração e fluxo completo em navegador, e há rotinas que verificam o ambiente de produção depois do deploy.
+A camada de integração usa **APIs REST** e route handlers, incluindo recebimento de **webhooks com verificação de assinatura** antes de qualquer escrita, rotinas agendadas e envio de e-mail transacional. Upload de imagem por URL pré-assinada em armazenamento de objetos, com processamento no cliente antes do envio.
+
+Em produção há monitoramento de erros e de sessões. A suíte cobre **testes unitários, de integração e end-to-end em navegador**, com verificação automatizada do ambiente após cada deploy, em pipeline de **CI/CD**.
+
+**Stack:** Next.js · React · TypeScript · Node.js · PostgreSQL · SQL · APIs REST · Webhooks · Tailwind CSS · Vitest · Playwright · Git
 
 ---
 
@@ -68,11 +72,13 @@ Um módulo à parte cuida do vestiário: armários numerados, de uniforme ou de 
 
 ### Como foi construído
 
-Next.js 16 com App Router e React 19, TypeScript e Tailwind. Supabase com Postgres e regras de acesso no próprio banco.
+Aplicação **Next.js 16** com App Router, **React 19** e **TypeScript**, estilizada com **Tailwind CSS**. Servidor em **Node.js**.
 
-A atualização de saldo não fica na aplicação: acontece em gatilhos SQL, disparados pela própria movimentação. É o que garante que nenhuma entrada ou saída registrada consiga deixar o estoque inconsistente, independentemente de onde ela veio.
+O banco é **PostgreSQL**, e a decisão central do projeto está nele: a atualização de saldo não vive na aplicação, e sim em **gatilhos e funções SQL** disparados pela própria movimentação. Isso garante que nenhuma entrada ou saída consiga deixar o estoque inconsistente, venha ela da interface, de uma importação em massa ou de uma correção manual. O controle de acesso também é aplicado no banco, por Row Level Security.
 
-O catálogo pode ser carregado de uma vez por importação de CSV, e os relatórios saem em PDF gerado no cliente.
+A modelagem cobre produtos, categorias, setores, colaboradores, movimentações e ocupação de armários, com integridade referencial e exclusão em cascata. Validação de entrada com schema tipado, importação de catálogo por CSV e geração de relatórios em PDF no cliente.
+
+**Stack:** Next.js · React · TypeScript · Node.js · PostgreSQL · SQL · Triggers e functions · APIs REST · Tailwind CSS · Git
 
 ---
 
@@ -101,11 +107,13 @@ O que sai da avaliação vira um plano de desenvolvimento individual, com açõe
 
 ### Como foi construído
 
-Next.js 16 com App Router e React 19, TypeScript e Tailwind. Supabase com Postgres.
+Aplicação **Next.js 16** com App Router, **React 19** com Server Components e Server Actions, **TypeScript** e **Tailwind CSS**. Servidor em **Node.js**.
 
-Os dados de cada empresa ficam isolados dentro do mesmo banco, o que é o requisito que define um sistema assim: nenhuma consulta pode atravessar de uma empresa para outra, por acidente ou por má-fé.
+O banco é **PostgreSQL** com arquitetura **multi-tenant**: os dados de todas as empresas convivem no mesmo banco, isolados por Row Level Security. É o requisito que define um sistema assim, porque nenhuma consulta pode atravessar de uma empresa para outra, por acidente ou por má-fé. Sobre esse isolamento roda um controle de permissão por papel, com quatro níveis de acesso.
 
-As listagens usam tabela com ordenação e filtro, a priorização de itens é feita arrastando, e os convites saem por e-mail com token de uso único. Testes automatizados cobrem as regras de acesso e o fluxo de avaliação.
+A modelagem cobre empresas, unidades, departamentos, cargos, competências, colaboradores, ciclos de avaliação, respostas, feedbacks, planos de desenvolvimento e processos seletivos. Formulários com validação por schema tipado, listagens com ordenação e filtro em tabela, reordenação por arrastar e soltar, e convite de usuário por e-mail com token de uso único. **Testes automatizados** cobrem as regras de acesso e o fluxo de avaliação.
+
+**Stack:** Next.js · React · TypeScript · Node.js · PostgreSQL · SQL · Multi-tenant · RBAC · APIs REST · Tailwind CSS · Vitest · Git
 
 ---
 
@@ -114,8 +122,10 @@ As listagens usam tabela com ordenação e filtro, a priorização de itens é f
 Coisas que decidi e você pode reverter:
 
 1. **Não digo "eu" em nenhum case.** Os textos descrevem o produto, não o autor. A voz em primeira pessoa fica no "Sobre mim". Se preferir "construí", "decidi", é uma reescrita rápida.
-2. **Não cito nomes de bibliotecas menores** (Recharts, dnd-kit, TanStack Table, jsPDF, Zod). Descrevi o que elas fazem em português. O leitor primário é cliente; a lista de tecnologias fica nos chips do card e no carrossel da home.
-3. **Não invento número.** Nenhum case tem métrica de resultado, conforme decidido em 003. Se você tiver dado real (casais atendidos no Ceremony, itens controlados no Silcon), me diga e eu coloco na meta do topo.
-4. **O Ceremony tem um painel administrativo interno** (crescimento, pagamentos, receita, sites, usuários) que não mencionei, para não alongar. Se quiser, entra em "Como funciona" numa frase.
-5. **O Silcon menciona a empresa nominalmente**, conforme você autorizou. A descrição do ramo veio do README do próprio repositório.
-6. **O Evoluteam tem planos de IA documentados** (resumo de avaliação, sugestão de PDI) marcados como pós-MVP. Não entraram, por serem roadmap e não produto. Se já existirem, me avise.
+2. **Duas linguagens por case, de propósito.** "O que é" e "Como funciona" falam com o cliente, em português comum. **"Como foi construído" fala com o recrutador e o tech lead**, em registro técnico, e fecha com uma linha `Stack:` enumerada para quem escaneia. É por isso que a seção é recolhível: o cliente pula, o técnico abre.
+3. **Nenhum provedor ou serviço é nomeado**, conforme sua orientação. O texto descreve a técnica, não o fornecedor: "webhooks com verificação de assinatura" em vez do provedor de PIX, "armazenamento de objetos com URL pré-assinada" em vez do nome do storage, "e-mail transacional" em vez do serviço, "monitoramento de erros" em vez da ferramenta. Também não cito Supabase: aparece como **PostgreSQL** e **Row Level Security**, que é o que o recrutador procura e o que descreve a tecnologia de fato usada.
+4. **Bibliotecas menores** (Recharts, dnd-kit, TanStack Table, jsPDF, Zod) continuam fora dos nomes, descritas pelo que fazem. As que sinalizam competência (Vitest, Playwright) entram na linha `Stack:`.
+5. **Não invento número.** Nenhum case tem métrica de resultado, conforme decidido em 003. Se você tiver dado real (casais atendidos no Ceremony, itens controlados no Silcon), me diga e eu coloco na meta do topo.
+6. **O Ceremony tem um painel administrativo interno** (crescimento, pagamentos, receita, sites, usuários) que não mencionei, para não alongar. Se quiser, entra em "Como funciona" numa frase.
+7. **O Silcon menciona a empresa nominalmente**, conforme você autorizou. A descrição do ramo veio do README do próprio repositório.
+8. **O Evoluteam tem planos de IA documentados** (resumo de avaliação, sugestão de PDI) marcados como pós-MVP. Não entraram, por serem roadmap e não produto. Se já existirem, me avise.
