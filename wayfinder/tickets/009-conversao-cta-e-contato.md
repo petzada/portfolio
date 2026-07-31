@@ -16,6 +16,8 @@ O portfólio tem um objetivo mensurável: virar conversa. Página estática não
 
 Depende de **Oferta e posicionamento freelance** (001): o CTA é a oferta transformada em verbo. "Entre em contato" é o CTA de quem não decidiu o que vende.
 
+**Herdado de 011:** a direção visual escolhida é a de portfólio-currículo — coluna estreita, monocromática, sem acento. Esse formato serve naturalmente o recrutador (audiência secundária) e não faz sozinho o trabalho de vender serviço ao cliente freelance (audiência primária, definida em 001). **Sem cor de acento, o CTA não tem botão colorido para se destacar** — a ênfase terá de vir de posição, espaço e texto. Este ticket é onde essa lacuna é compensada, ou não é.
+
 Precisa fechar com:
 
 1. **A ação única primária** — orçamento por WhatsApp, agendamento de conversa, e-mail. Uma só; duas ações de mesmo peso reduzem as duas.

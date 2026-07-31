@@ -21,7 +21,7 @@ A construção em si, o deploy e a produção da copy final são esforço separa
 - Stack: Next.js + TypeScript + Tailwind CSS — a mesma do Sistema Silcon. O portfólio é vitrine da stack que se vende.
 - Deploy: **Railway**, com **domínio próprio** pago.
 - Estrutura: **one-pager + páginas de case por projeto**.
-- Direção visual: **em disputa** — `DESIGN.md` (sistema Linear: canvas #010102, acento lavanda escasso, escada de quatro superfícies, dark absoluto) versus `REFERENCIAS-PORTFOLIOS.md` (canvas claro, coluna estreita, receita de motion). Resolvido por **Conflito de direção visual** (011), que bloqueia o protótipo.
+- Direção visual: **`REFERENCIAS-PORTFOLIOS.md`** — light `#fafafa` por padrão com toggle dark, coluna única de ~800px, **Orbitron** (Bold/Regular) no display e **Inter** no corpo, **sem acento cromático**, motion em três famílias, sombra só no hover. O `DESIGN.md` foi **rebaixado a referência sem autoridade** por 011; não seguir suas regras.
 - Fonte de verdade da carreira: `CURRICULO.md` + LinkedIn (https://www.linkedin.com/in/petigrosso/).
 
 **Ativos.** Os projetos rodam localmente e podem ser capturados em telas reais. Existem outros projetos além dos dois listados no `CURRICULO.md` — o inventário completo ainda não está levantado.
@@ -43,6 +43,8 @@ A construção em si, o deploy e a produção da copy final são esforço separa
 
 - [Curadoria dos projetos](tickets/002-curadoria-dos-projetos.md) — grade de **três**, nesta ordem: **Ceremony** (ceremony.com.br, presentes de casamento por PIX, no ar) → **Silcon** (estoque e almoxarifado, em uso real) → **Evoluteam** (RH, PDI e avaliação, funcional). **Feltrin Noivas fica de fora** — não está no ar e é redundante com o Ceremony. Critério de corte escrito e reutilizável: vivo / visualmente apresentável / explicável em 30s a leigo / prova algo que nenhum outro card prova. Pendente: stack de Ceremony e Evoluteam.
 
+- [Conflito de direção visual](tickets/011-conflito-de-direcao-visual.md) — **`REFERENCIAS-PORTFOLIOS.md` vence; `DESIGN.md` perde autoridade.** Light com toggle dark, coluna ~800px, Orbitron no display e Inter no corpo, página monocromática, motion em três famílias, sombra só no hover. Fecha a névoa de motion e traz o toggle de tema de volta ao escopo. A escada de superfícies do 006 é reaproveitada como base do tema dark; a auditoria de contraste precisa ser refeita para canvas claro.
+
 **Consequência de arquitetura a carregar adiante:** o site não é "estático servido por CDN" — é SSG rodando em servidor Next dentro de um container. Muda o que **Modelo de conteúdo e rotas** (004) pode assumir, e abre a porta para `next/image` de verdade.
 
 ## Not yet specified
@@ -50,6 +52,8 @@ A construção em si, o deploy e a produção da copy final são esforço separa
 Névoa em escopo, ainda sem nitidez para virar ticket. Graduará conforme a fronteira avançar.
 
 - **Metadata e compartilhamento** — title/description por rota, imagem OG (crítica: link de portfólio circula colado em WhatsApp e DM do LinkedIn), favicon, `sitemap.xml`. Depende do modelo de conteúdo e das rotas.
+- **Contraste no tema claro** — a auditoria do research 006 mediu todos os níveis de texto contra canvas escuro, e 011 tornou o light o padrão. A matriz precisa ser recalculada contra `#fafafa`, e o tema dark do toggle precisa da sua própria verificação.
+- **Sistema de cor do toggle dark** — com "sem acento cromático" e light como padrão, o tema escuro precisa de sua própria paleta neutra. A escada de superfícies do 006 é o ponto de partida.
 - **Idioma** — só PT-BR, ou PT-BR + EN? Inglês A2 no currículo pesa contra manter duas versões; cliente freelance brasileiro não precisa. Revisitar depois que a oferta estiver definida.
 - **Estratégia de imagens e performance** — formato, dimensões e peso das capturas. O modo de servir já está resolvido (`standalone`, `next/image` disponível), então resta a decisão de conteúdo: quanto pesa uma captura de UI densa e como ela se comporta no 4G do lead.
 - **Registro do domínio** — qual nome, qual registrador, quanto custa. Depende do posicionamento (nome pessoal versus nome de marca/estúdio).
@@ -64,5 +68,4 @@ Trabalho conscientemente colocado além do destino. Não graduará; só retorna 
 - **Blog / seção de artigos** — outro compromisso de escrita, outro objetivo (SEO de conteúdo). Não é o que converte cliente freelance nesta página.
 - **CMS ou painel administrativo** — o próprio autor edita o repo; um CMS é infraestrutura sem leitor.
 - **Backend próprio, API, banco de dados** — o destino é página estática por definição.
-- **Toggle light/dark** — o `DESIGN.md` proíbe explicitamente ("Don't ship a light-mode marketing page").
 - **Construção, deploy e copy final** — são o *depois* do spec, não o mapa.

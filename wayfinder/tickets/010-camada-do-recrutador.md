@@ -16,6 +16,8 @@ Marcio definiu prioridade clara: cliente manda, recrutador vem em segundo plano.
 
 Depende de **Oferta e posicionamento freelance** (001): só dá para saber quanto espaço sobra para o recrutador depois de saber quanto a oferta ocupa.
 
+**Herdado de 011:** a direção visual escolhida aproxima a página do formato de currículo online. Isso facilita muito atender o recrutador — mas aumenta o risco oposto ao que este ticket foi criado para evitar: em vez de o recrutador ser espremido, o **cliente** é que pode sumir. Ao decidir quanto espaço a carreira ocupa, lembrar que a prioridade declarada em 001 continua sendo o cliente freelance.
+
 Precisa fechar com:
 
 1. **O mecanismo de separação** — seção discreta no fim do one-pager, página `/sobre` própria, ou apenas links de LinkedIn e GitHub no rodapé. O que existe sem competir com o CTA primário.
