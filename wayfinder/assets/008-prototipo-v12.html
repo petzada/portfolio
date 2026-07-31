@@ -28,6 +28,9 @@
    NOVO na v12:
    - Largura uniforme: todo bloco de texto ocupa a coluna inteira, com a
      borda direita alinhada em todas as secoes.
+   - Tema dark como padrao. So abre claro se o sistema pedir claro.
+   - Sem dividers entre secoes: nem a hairline sob o rotulo, nem a linha
+     acima do rodape. A separacao passa a ser so o espaco vertical.
 
    Da v11:
    - Texto corrido justificado, com hifenizacao automatica. Ver o bloco
@@ -119,8 +122,9 @@ body.is-narrow .avatar{width:88px;height:88px}
 .pill--solid{background:var(--ink);color:var(--canvas);border-color:var(--ink)}
 .pill--solid:hover{opacity:.86}
 
+/* sem hairline sob o rotulo: a separacao entre secoes fica so no espaco */
 .label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--subtle);
-  border-bottom:1px solid var(--line);padding-bottom:10px;margin:96px 0 32px}
+  margin:96px 0 30px}
 body.is-narrow .label{margin:64px 0 24px}
 
 /* ---------- 3. stack: carrossel automatico de uma linha ----------
@@ -213,7 +217,7 @@ body.is-narrow .edu{grid-template-columns:1fr;gap:28px}
 .edu__x{margin:12px 0 0;font-size:14px;color:var(--muted);max-width:46ch}
 
 /* ---------- 6. footer ---------- */
-.foot{margin-top:104px;padding-top:28px;border-top:1px solid var(--line);
+.foot{margin-top:112px;
   display:flex;flex-wrap:wrap;align-items:baseline;gap:16px 28px}
 body.is-narrow .foot{margin-top:72px}
 .foot__links{display:flex;flex-wrap:wrap;gap:8px 20px}
