@@ -30,6 +30,8 @@ Depende de **Oferta e posicionamento freelance** (001): só dá para saber quant
 
 O risco que sobrou está registrado em 008: Trajetória isolada exibe dois cargos administrativos e nenhum de desenvolvimento. O autor optou conscientemente por manter.
 
+**Complicação vinda de 003:** os cases **não vão linkar repositório no GitHub**, porque Silcon é sistema de uma empresa real e Ceremony movimenta pagamento. A decisão é correta, mas retira do recrutador exatamente o artefato que ele mais procura. Este ticket precisa decidir o que ocupa esse lugar: um perfil do GitHub com outros repositórios que possam ser públicos, um repositório de exemplo criado para vitrine, ou a aceitação explícita de que o código não é auditável por estranhos.
+
 Resta fechar:
 
 Precisa fechar com:

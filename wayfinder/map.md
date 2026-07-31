@@ -47,6 +47,8 @@ A construção em si, o deploy e a produção da copy final são esforço separa
 
 - [Protótipo — hero e card de projeto](tickets/008-prototipo-hero-e-card-de-projeto.md) — referência aprovada em [`assets/008-prototipo-v6.html`](assets/008-prototipo-v6.html), após seis iterações. **Trava a estrutura do one-pager**: Hero → Projetos → Sobre mim → Trajetória → Formação → CTA. Hero empilhado no padrão do Anderson (avatar 112px, nome em Orbitron em duas linhas, pitch, meta, pills). Card emoldurado 16:10, clique abre o case; grade com Ceremony full-width e os outros dois 2-up. Status sem cor (ponto sólido para ativo, vazado para inativo), fechando a pendência de 011. Registro de voz da copy fixado: eixo na capacidade de desenvolvimento, não na origem administrativa.
 
+- [Anatomia da página de case](tickets/003-anatomia-da-pagina-de-case.md) — **case de produto**, não case de cliente, porque nenhum dos três projetos teve contratante. Sequência: nome, frase, meta, captura de abertura 16:9, "O que é", "Como funciona", "Como foi construído" (recolhível), fechamento com "ver no ar" e CTA. **250 a 350 palavras** e **três capturas** por case. Sem link de repositório, por segurança e adequação. **Não inventar métrica**: um case de produto termina em "veja funcionando", não em porcentagem.
+
 **Consequência de arquitetura a carregar adiante:** o site não é "estático servido por CDN" — é SSG rodando em servidor Next dentro de um container. Muda o que **Modelo de conteúdo e rotas** (004) pode assumir, e abre a porta para `next/image` de verdade.
 
 ## Not yet specified
@@ -56,6 +58,7 @@ Névoa em escopo, ainda sem nitidez para virar ticket. Graduará conforme a fron
 - **Metadata e compartilhamento** — title/description por rota, imagem OG (crítica: link de portfólio circula colado em WhatsApp e DM do LinkedIn), favicon, `sitemap.xml`. Depende do modelo de conteúdo e das rotas.
 - **Contraste no tema claro** — a auditoria do research 006 mediu todos os níveis de texto contra canvas escuro, e 011 tornou o light o padrão. A matriz precisa ser recalculada contra `#fafafa`, e o tema dark do toggle precisa da sua própria verificação.
 - **Sistema de cor do toggle dark** — com "sem acento cromático" e light como padrão, o tema escuro precisa de sua própria paleta neutra. A escada de superfícies do 006 é o ponto de partida.
+- **Acesso aos repositórios** — 003 definiu que o autor dá acesso ao GitHub e ao material dos projetos para que os cases sejam redigidos. Pendência de insumo, não decisão.
 - **Idioma** — só PT-BR, ou PT-BR + EN? Inglês A2 no currículo pesa contra manter duas versões; cliente freelance brasileiro não precisa. Revisitar depois que a oferta estiver definida.
 - **Estratégia de imagens e performance** — formato, dimensões e peso das capturas. O modo de servir já está resolvido (`standalone`, `next/image` disponível), então resta a decisão de conteúdo: quanto pesa uma captura de UI densa e como ela se comporta no 4G do lead.
 - **Registro do domínio** — qual nome, qual registrador, quanto custa. Depende do posicionamento (nome pessoal versus nome de marca/estúdio).

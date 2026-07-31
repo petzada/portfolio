@@ -3,8 +3,8 @@ id: 003
 title: Anatomia da página de case
 type: grilling
 mode: HITL
-status: open
-assignee:
+status: closed
+assignee: sessao-principal
 blocked_by: [002]
 ---
 
@@ -29,4 +29,46 @@ Precisa fechar com:
 
 ## Resolution
 
-_(aberto)_
+### Enquadramento: case de produto
+
+Cada projeto é tratado como **um produto que existe**: o que faz, para quem, como funciona, como foi construído.
+
+A razão é factual e vale ficar registrada, porque ela reaparece toda vez que alguém for reescrever um case: **nenhum dos três projetos teve cliente contratante.** Ceremony é produto do próprio autor, Silcon nasceu de um problema do emprego dele, Evoluteam é demo. O formato clássico de case (cliente chegou com uma dor, entreguei a solução, o resultado foi X) não descreve nenhum dos três. Adotá-lo produziria ficção ou desculpa.
+
+O enquadramento de produto contorna isso sem mentir: não promete resultado de cliente porque não fala de cliente. Para o leitor primário, a mensagem que sobra é a certa, que ele constrói coisas completas e que funcionam.
+
+### Sequência de seções, travada
+
+1. Voltar
+2. Nome do projeto, em Orbitron
+3. Frase de uma linha, a mesma do card
+4. Meta: status, URL pública quando existir, stack
+5. **Captura de abertura**, 16:9, a tela que melhor vende o produto
+6. **O que é**: produto, público, contexto de uso
+7. Captura de apoio
+8. **Como funciona**: o fluxo principal, ponta a ponta
+9. Captura de apoio
+10. **Como foi construído**: stack, arquitetura, decisões. **Recolhível**, porque o leitor primário é cliente e o secundário é tech lead
+11. Fechamento: "ver no ar" quando existir, mais CTA de orçamento
+
+### Extensão: 250 a 350 palavras por case
+
+Três ou quatro parágrafos, com as capturas fazendo o trabalho pesado. A escolha é operacional e deliberada: um gabarito de 800 palavras que nunca é preenchido vale menos que um de 250 que está no ar.
+
+### Método de escrita, definido nesta sessão
+
+O autor dá acesso aos repositórios no GitHub e ao material dos projetos; o agente extrai os insights de produto e redige os cases; o autor revisa e aprova. Isso **não altera o destino do mapa** (a copy final continua fora dele, é trabalho de implementação), mas fixa quem faz o quê, e cria uma pendência de acesso.
+
+### Telas: três por case
+
+Abertura mais duas de apoio. Já refletido nas especificações de 007. Nenhuma captura em viewport mobile foi pedida.
+
+### Links externos
+
+- **Demo ao vivo, quando existir.** Só o Ceremony tem. O campo é opcional no modelo de 004.
+- **CTA de orçamento ao fim do case.** Quem terminou de ler um case é o lead mais quente da página; encerrar sem chamada desperdiça exatamente essa pessoa.
+- **Repositório no GitHub: não.** Decisão consciente. Silcon é sistema de uma empresa real e Ceremony movimenta pagamento; nenhum dos dois deveria ter código público. Consequência propagada para 010, porque retira do recrutador justamente o que ele mais procura.
+
+### Sobre a ausência de métrica
+
+A pergunta original deste ticket era com o que fechar um case sem número de resultado. O enquadramento de produto **dissolve a pergunta** em vez de respondê-la: um case de produto termina em "veja funcionando" e em convite para conversar, não em porcentagem. Fica registrado como regra: **não inventar métrica.** Se algum dia houver número real (usuários do Ceremony, itens controlados no Silcon), ele entra na meta do topo, não numa seção de resultado.
