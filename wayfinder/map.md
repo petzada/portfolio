@@ -21,7 +21,7 @@ A construção em si, o deploy e a produção da copy final são esforço separa
 - Stack: Next.js + TypeScript + Tailwind CSS — a mesma do Sistema Silcon. O portfólio é vitrine da stack que se vende.
 - Deploy: **Railway**, com **domínio próprio** pago.
 - Estrutura: **one-pager + páginas de case por projeto**.
-- Direção visual: `DESIGN.md` (sistema Linear — canvas #010102, acento lavanda #5e6ad2 escasso, escada de quatro superfícies, tracking negativo agressivo no display, sem gradientes, sem light mode).
+- Direção visual: **em disputa** — `DESIGN.md` (sistema Linear: canvas #010102, acento lavanda escasso, escada de quatro superfícies, dark absoluto) versus `REFERENCIAS-PORTFOLIOS.md` (canvas claro, coluna estreita, receita de motion). Resolvido por **Conflito de direção visual** (011), que bloqueia o protótipo.
 - Fonte de verdade da carreira: `CURRICULO.md` + LinkedIn (https://www.linkedin.com/in/petigrosso/).
 
 **Ativos.** Os projetos rodam localmente e podem ser capturados em telas reais. Existem outros projetos além dos dois listados no `CURRICULO.md` — o inventário completo ainda não está levantado.
@@ -41,6 +41,8 @@ A construção em si, o deploy e a produção da copy final são esforço separa
 
 - [Oferta e posicionamento freelance](tickets/001-oferta-e-posicionamento-freelance.md) — **oferta ampla por decisão explícita do autor**, sem nicho; lead esperado é desconhecido vindo da internet; a inexperiência não é mencionada (projetos aparecem como projetos, sem rótulo acadêmico); nenhum filtro de escopo. Riscos aceitos e registrados no ticket. **Inverte o mapa: como não há categoria declarada, a grade de projetos passa a ser o posicionamento** — 002 e 007 sobem para críticos.
 
+- [Curadoria dos projetos](tickets/002-curadoria-dos-projetos.md) — grade de **três**, nesta ordem: **Ceremony** (ceremony.com.br, presentes de casamento por PIX, no ar) → **Silcon** (estoque e almoxarifado, em uso real) → **Evoluteam** (RH, PDI e avaliação, funcional). **Feltrin Noivas fica de fora** — não está no ar e é redundante com o Ceremony. Critério de corte escrito e reutilizável: vivo / visualmente apresentável / explicável em 30s a leigo / prova algo que nenhum outro card prova. Pendente: stack de Ceremony e Evoluteam.
+
 **Consequência de arquitetura a carregar adiante:** o site não é "estático servido por CDN" — é SSG rodando em servidor Next dentro de um container. Muda o que **Modelo de conteúdo e rotas** (004) pode assumir, e abre a porta para `next/image` de verdade.
 
 ## Not yet specified
@@ -52,7 +54,6 @@ Névoa em escopo, ainda sem nitidez para virar ticket. Graduará conforme a fron
 - **Estratégia de imagens e performance** — formato, dimensões e peso das capturas. O modo de servir já está resolvido (`standalone`, `next/image` disponível), então resta a decisão de conteúdo: quanto pesa uma captura de UI densa e como ela se comporta no 4G do lead.
 - **Registro do domínio** — qual nome, qual registrador, quanto custa. Depende do posicionamento (nome pessoal versus nome de marca/estúdio).
 - **Analytics** — se vale medir conversão, com qual ferramenta, e o que isso implica de LGPD e de aviso de cookies.
-- **Motion** — o `DESIGN.md` é silencioso sobre animação. Quanto movimento a página tem, se algum.
 - **Aquisição de tráfego** — a decisão de 001 pressupõe lead desconhecido vindo da internet, mas página estática não gera tráfego sozinha. Alguém precisa levar essa pessoa até o link (LinkedIn, Instagram, busca, comunidade). É marketing, não site — provavelmente **fora do destino**, mas fica anotado até que se decida se alguma coisa na página precisa servir a isso (metadata de compartilhamento, âncoras para campanha).
 - **Plano de manutenção** — o ritual para adicionar um projeto novo daqui a seis meses sem reaprender o repo.
 

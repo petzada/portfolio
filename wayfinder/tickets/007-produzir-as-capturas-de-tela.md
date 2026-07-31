@@ -18,6 +18,8 @@ Nada a decidir — é trabalho manual que trava as decisões visuais seguintes. 
 
 Depende de **Curadoria dos projetos** (002), que diz *quais* projetos, e de **Anatomia da página de case** (003), que diz *quantas telas e o que cada uma prova*.
 
+**Projetos definidos por 002, nesta ordem:** Ceremony (ceremony.com.br) · Silcon (estoque/almoxarifado) · Evoluteam (RH, PDI e avaliação). Feltrin Noivas está fora. Os três estão vivos, então todos podem ser capturados com dados reais em vez de mock.
+
 Trabalho a executar:
 
 1. Subir cada projeto selecionado localmente, com **dados de exemplo plausíveis** — nada de tabela vazia, "Lorem ipsum", ou nome de cliente de teste. Tela de produto vazia mata a credibilidade mais rápido do que tela nenhuma.

@@ -3,8 +3,8 @@ id: 002
 title: Curadoria dos projetos
 type: grilling
 mode: HITL
-status: open
-assignee:
+status: closed
+assignee: sessao-principal
 blocked_by: [001]
 ---
 
@@ -33,4 +33,48 @@ Precisa fechar com:
 
 ## Resolution
 
-_(aberto)_
+### Inventário levantado
+
+Quatro projetos existem. Três estão vivos hoje.
+
+| Projeto | O que é | Vivo? |
+|---|---|---|
+| **Ceremony** (ceremony.com.br) | Plataforma de casamento — noivos recebem presentes via PIX | No ar e funcionando, com domínio próprio |
+| **Silcon** | Controle de estoque e almoxarifado — dashboard, catálogo, movimentações, alertas de preço, fila de reposição | Em uso real na operação da Silcon, por outras pessoas |
+| **Evoluteam** | RH — PDI e avaliação de desempenho | Funcional de ponta a ponta, demonstrável |
+| **Feltrin Noivas** | Landing page para noivaria (mais o sistema de gestão acadêmico) | Não está no ar |
+
+### Critério de corte adotado
+
+Substituindo "prova a oferta", que a resolução de 001 tornou inaplicável:
+
+1. **Está vivo** — no ar ou em uso real. Projeto que só roda na máquina do autor não entra.
+2. **É apresentável visualmente** — rende captura de tela que sustenta um card.
+3. **É explicável em 30 segundos a quem não é técnico.**
+4. **Prova algo que nenhum outro card já prova** — redundância derruba o mais fraco dos dois.
+
+Reutilizável quando surgir projeto novo.
+
+### Lista final e ordem
+
+1. **Ceremony** — abre a página.
+2. **Silcon**
+3. **Evoluteam**
+
+**Feltrin Noivas fica de fora.** Falha em dois critérios: não está viva, e é redundante com o Ceremony, que cobre o mesmo mundo (casamento) fazendo muito mais. Segue no `CURRICULO.md`, que é exaustivo por natureza; a página é curada.
+
+### O papel de cada card — cada um prova algo diferente
+
+- **Ceremony** — prova que Marcio constrói **produto de verdade, no ar, com dinheiro passando**. Pagamento por PIX é a prova mais forte disponível para um cliente desconhecido: não é demonstração, é sistema em que estranhos confiam com o próprio dinheiro. É por isso que abre.
+- **Silcon** — prova **uso diário real por outras pessoas** numa operação industrial, e é onde a vivência administrativa do autor (almoxarifado, custos, SAP B1) aparece dentro do código. Vindo logo depois do Ceremony, cobre o maior espectro possível em dois cards: consumidor final e operação interna.
+- **Evoluteam** — prova **modelagem de processo corporativo complexo** (PDI, ciclo de avaliação de desempenho). Fecha a grade mostrando que o autor dá conta de domínio de gente grande, não só de CRUD.
+
+Nenhum buraco: a grade cobre B2C com pagamento, operação industrial e RH corporativo. Para uma oferta ampla, é uma cobertura larga e ainda assim coerente — três sistemas web completos, dois deles B2B.
+
+### Nota sobre o agrupamento que se desfez
+
+Durante o grilling apareceram dois clusters temáticos — casamento (Ceremony, Feltrin) e gestão interna (Silcon, Evoluteam). Com a saída da Feltrin, o cluster de casamento deixa de existir e o agrupamento perde função. A coerência da grade agora vem da qualidade e do escopo dos três, não de tema comum. **Não tentar reconstruir esse agrupamento no layout.**
+
+### Pendência herdada por 003, 004 e 007
+
+Stack de **Ceremony** e **Evoluteam** ainda não levantada (de Silcon sabe-se: Next.js, TypeScript, Tailwind, shadcn/ui, PostgreSQL). Necessária para os chips de tecnologia no card e para a seção técnica do case. Não bloqueia — é dado factual a preencher.
