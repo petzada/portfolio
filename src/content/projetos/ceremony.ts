@@ -1,6 +1,8 @@
 import type { Projeto } from "@/lib/types";
 
-import { imagemPendente } from "./imagem-pendente";
+import ceremonyApoio1 from "./img/ceremony-apoio-1.png";
+import ceremonyApoio2 from "./img/ceremony-apoio-2.png";
+import ceremonyCapa from "./img/ceremony-capa.png";
 
 export const ceremony = {
   slug: "ceremony",
@@ -11,17 +13,17 @@ export const ceremony = {
   url: "https://ceremony.com.br",
   stack: ["Next.js", "TypeScript", "PIX"],
   capa: {
-    src: imagemPendente("ceremony-capa"),
-    alt: "Captura pendente da lista de presentes do Ceremony",
+    src: ceremonyCapa,
+    alt: "Lista de presentes do Ceremony",
   },
   apoio: [
     {
-      src: imagemPendente("ceremony-apoio-1"),
-      alt: "Captura pendente do fluxo de presente do Ceremony",
+      src: ceremonyApoio1,
+      alt: "Fluxo de presente do Ceremony",
     },
     {
-      src: imagemPendente("ceremony-apoio-2"),
-      alt: "Captura pendente do painel do casal no Ceremony",
+      src: ceremonyApoio2,
+      alt: "Painel do casal no Ceremony",
     },
   ],
   oQueE: `Plataforma de sites de casamento. O casal monta e publica um site com convite, confirmação de presença e lista de presentes, e recebe os presentes por PIX na própria conta.

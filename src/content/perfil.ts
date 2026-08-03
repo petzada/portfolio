@@ -44,4 +44,4 @@ export const perfil = {
   ],
 } as const;
 
-export const siteUrl = "https://marciopetigrosso.dev.br";
+export const siteUrl = "https://petigrosso.com";

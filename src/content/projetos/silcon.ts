@@ -1,6 +1,8 @@
 import type { Projeto } from "@/lib/types";
 
-import { imagemPendente } from "./imagem-pendente";
+import silconApoio1 from "./img/silcon-apoio-1.png";
+import silconApoio2 from "./img/silcon-apoio-2.png";
+import silconCapa from "./img/silcon-capa.png";
 
 export const silcon = {
   slug: "silcon",
@@ -9,17 +11,17 @@ export const silcon = {
   status: "em-uso",
   stack: ["Next.js", "TypeScript", "PostgreSQL"],
   capa: {
-    src: imagemPendente("silcon-capa"),
-    alt: "Captura pendente do dashboard do Silcon Estoque",
+    src: silconCapa,
+    alt: "Dashboard do Silcon Estoque",
   },
   apoio: [
     {
-      src: imagemPendente("silcon-apoio-1"),
-      alt: "Captura pendente da fila de reposição do Silcon Estoque",
+      src: silconApoio1,
+      alt: "Fila de reposição do Silcon Estoque",
     },
     {
-      src: imagemPendente("silcon-apoio-2"),
-      alt: "Captura pendente do histórico de movimentações do Silcon Estoque",
+      src: silconApoio2,
+      alt: "Histórico de movimentações do Silcon Estoque",
     },
   ],
   oQueE: `Sistema de gestão do estoque de materiais internos da Silcon Ambiental, empresa de gestão de resíduos hospitalares. Controla catálogo de produtos, movimentações, pedidos de compra e o vestiário dos colaboradores.
