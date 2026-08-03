@@ -48,6 +48,7 @@ html {
 }
 
 body {
+  position: relative;
   min-height: 100dvh;
   overflow-x: clip;
   background: var(--canvas);
@@ -101,29 +102,19 @@ body {
 .marquee-group {
   display: flex;
   flex: none;
-  gap: 10px;
-  padding-right: 10px;
+  gap: 34px;
+  padding-right: 34px;
 }
 
 .tech-icon {
   display: block;
-  width: 15px;
-  height: 15px;
+  width: 22px;
+  height: 22px;
   flex: none;
   background-color: currentColor;
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: contain;
-}
-
-.project-media {
-  transition:
-    transform 500ms var(--ease-portfolio),
-    opacity 200ms linear;
-}
-
-.project-card:hover .project-media {
-  transform: scale(1.05);
 }
 
 @keyframes marquee-slide {
@@ -166,9 +157,5 @@ body {
   .motion-reveal {
     opacity: 1 !important;
     transform: none !important;
-  }
-
-  .project-card:hover .project-media {
-    transform: none;
   }
 }

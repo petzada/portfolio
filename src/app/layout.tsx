@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 import { MotionProvider } from "@/components/motion-provider";
 import { ThemeProvider } from "@/components/theme-provider";
+import { TopoAcoes } from "@/components/topo-acoes";
 import { perfil, siteUrl } from "@/content/perfil";
 import "@/styles/globals.css";
 
@@ -66,7 +67,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <MotionProvider>{children}</MotionProvider>
+          <MotionProvider>
+            <TopoAcoes />
+            {children}
+          </MotionProvider>
         </ThemeProvider>
       </body>
     </html>

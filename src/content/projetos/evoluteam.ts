@@ -1,29 +1,31 @@
 import type { Projeto } from "@/lib/types";
 
-import { imagemPendente } from "./imagem-pendente";
+import evoluteamApoio1 from "./img/evoluteam-apoio-1.png";
+import evoluteamApoio2 from "./img/evoluteam-apoio-2.png";
+import evoluteamCapa from "./img/evoluteam-capa.png";
 
 export const evoluteam = {
   slug: "evoluteam",
   nome: "Evoluteam",
   frase:
-    "Avaliação de desempenho e PDI com histórico, fora da planilha compartilhada.",
+    "Plataforma de apoio a RH: avaliação de desempenho e PDI, fora da planilha compartilhada.",
   status: "demo",
-  stack: ["Next.js", "TypeScript", "Supabase"],
+  stack: ["Next.js", "TypeScript", "PostgreSQL"],
   capa: {
-    src: imagemPendente("evoluteam-capa"),
-    alt: "Captura pendente do dashboard do Evoluteam",
+    src: evoluteamCapa,
+    alt: "Dashboard do Evoluteam com indicadores de gestão de pessoas",
   },
   apoio: [
     {
-      src: imagemPendente("evoluteam-apoio-1"),
-      alt: "Captura pendente de um ciclo de avaliação do Evoluteam",
+      src: evoluteamApoio1,
+      alt: "Ciclo de avaliação do Evoluteam com o progresso de autoavaliação e avaliação do gestor",
     },
     {
-      src: imagemPendente("evoluteam-apoio-2"),
-      alt: "Captura pendente de um plano de desenvolvimento no Evoluteam",
+      src: evoluteamApoio2,
+      alt: "Relatórios de recrutamento do Evoluteam com funil de conversão e tempo por etapa",
     },
   ],
-  oQueE: `Aplicação web de gestão de pessoas para empresas de vinte a trezentos colaboradores que ainda fazem avaliação de desempenho no manual, com formulário solto e planilha compartilhada.
+  oQueE: `Aplicação web de gestão de pessoas para empresas que ainda fazem avaliação de desempenho no manual, com formulário solto e planilha compartilhada.
 
 Reúne num lugar só a estrutura da empresa, os ciclos de avaliação, o feedback contínuo, os planos de desenvolvimento individual e o acompanhamento de indicadores.`,
   comoFunciona: `A empresa cadastra unidades, departamentos, cargos e competências, e a partir daí registra os colaboradores, cada um com gestor responsável e nível. A entrada de uma pessoa no sistema acontece por convite enviado no e-mail dela.

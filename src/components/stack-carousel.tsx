@@ -10,7 +10,7 @@ function StackGroup({ hidden = false }: { hidden?: boolean }) {
     <div aria-hidden={hidden || undefined} className="marquee-group">
       {perfil.stack.map((item) => (
         <span
-          className="inline-flex flex-none items-center gap-2 rounded-control border border-line bg-surface px-3.5 py-[9px] text-[13px] font-medium text-ink"
+          className="inline-flex flex-none items-center gap-2.5 text-[17px] font-medium text-ink sm:text-lg"
           key={item.nome}
         >
           {item.icone ? (

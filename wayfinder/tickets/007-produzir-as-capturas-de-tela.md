@@ -3,8 +3,8 @@ id: 007
 title: Produzir as capturas de tela dos projetos
 type: task
 mode: HITL
-status: open
-assignee:
+status: closed
+assignee: marcio
 blocked_by: [002, 003]
 ---
 
@@ -42,4 +42,16 @@ Se algum projeto não render uma captura decente, isso é sinal para 002: ele pr
 
 ## Resolution
 
-_(aberto)_
+As nove capturas e o retrato foram produzidos pelo autor e estão versionados em `src/content/projetos/img/` e `src/content/hero.png`. Nenhum slot pendente restou no conteúdo.
+
+**Desvio da especificação, aceito.** As capturas não saíram nos alvos de 1920 × 1080 e 1600 × 1000. Ceremony e Silcon vieram a ~1350 × 600 (2,25:1) e Evoluteam a ~1262 × 908 (1,39:1), todas capturas de janela de navegador.
+
+A consequência apareceu na primeira montagem: com `object-cover` nas molduras de proporção fixa, o recorte comia de 21% a 29% da largura de cada captura. A decisão do autor foi **mostrar a imagem inteira**, e a exibição mudou para acomodar o arquivo em vez de o contrário:
+
+- páginas de case: a moldura assume a proporção natural do arquivo, sem corte e sem faixa vazia;
+- cards da home: proporção fixa preservada, para não quebrar a regularidade da grade, com a captura contida inteira dentro dela;
+- o zoom de 5% no hover foi removido, porque recortava a imagem no exato momento em que o visitante olha para ela.
+
+**Pendência que sobrou, registrada em `docs/pendencias-manuais.md`:** o item 2 deste ticket, anonimizar dado real de empresa, não foi cumprido em `silcon-apoio-2.png`, que exibe nomes completos de colaboradores da Silcon Ambiental.
+
+O item 4, recorte em viewport móvel, não foi produzido e não é mais esperado pela anatomia aprovada em 003.

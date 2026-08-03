@@ -32,9 +32,11 @@ export function Trajetoria() {
               <p className="mt-1 text-sm font-medium text-muted">
                 {emprego.cargo}
               </p>
-              <p className="copy mt-2.5 text-sm text-muted">
-                {emprego.descricao}
-              </p>
+              <ul className="mt-2.5 grid list-disc gap-1.5 pl-[18px] text-sm text-muted marker:text-subtle">
+                {emprego.descricao.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </Reveal>
           </li>
         ))}

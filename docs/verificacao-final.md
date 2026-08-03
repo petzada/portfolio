@@ -1,62 +1,74 @@
 # Verificação final
 
-Data da auditoria: 31/07/2026.
+Data da auditoria: 03/08/2026. Substitui a auditoria de 31/07/2026, feita quando as capturas ainda eram slots pendentes.
 
 ## Compilação e rotas
 
-- `npm run typecheck`: aprovado.
-- `npm run lint`: aprovado.
-- `npm run format:check`: aprovado.
-- `npm run build`: aprovado.
-- Saída standalone: `.next/standalone/server.js` gerada.
-- Home, três cases, imagem Open Graph, favicon, `robots.txt` e `sitemap.xml`: gerados estaticamente.
+- `npm run typecheck`, `npm run lint`, `npm run format:check` e `npm run build`: aprovados.
+- Saída standalone gerada; 11 rotas pré-renderizadas.
+- Home, três cases, imagem Open Graph, favicon, `robots.txt` e `sitemap.xml`: estáticos.
 - `/projetos/inexistente`: HTTP 404.
 - `motion.`: nenhuma ocorrência; as animações usam somente `m.` com `LazyMotion`, `domAnimation` e modo `strict`.
 
+## Servidor standalone
+
+Medido no `server.js` gerado, executado com a mesma disposição de arquivos que o `Dockerfile` monta.
+
+| Rota                               | Status |            Tipo |
+| ---------------------------------- | -----: | --------------: |
+| `/`                                |    200 |       text/html |
+| `/projetos/ceremony`               |    200 |       text/html |
+| `/projetos/silcon`                 |    200 |       text/html |
+| `/projetos/evoluteam`              |    200 |       text/html |
+| `/sitemap.xml`                     |    200 | application/xml |
+| `/robots.txt`                      |    200 |      text/plain |
+| `/opengraph-image`                 |    200 |       image/png |
+| `/curriculo-marcio-petigrosso.pdf` |    200 | application/pdf |
+| `/_next/image?...`                 |    200 |       image/png |
+
+O PDF e o otimizador de imagem só respondem quando `public/` e `.next/static/` estão ao lado do `server.js`, que é exatamente o que o `Dockerfile` copia. Rodar `node .next/standalone/server.js` a partir da raiz do repositório dá 404 nesses dois — é limitação do atalho, não do build.
+
+## Produção
+
+Conferido em `https://petigrosso.com`: home, `/sitemap.xml`, `/opengraph-image` e o PDF do currículo respondem 200, e o otimizador devolve `image/png`. O sitemap lista as quatro URLs no domínio correto.
+
 ## Navegador
 
-A auditoria foi feita no Microsoft Edge headless pelo Chrome DevTools Protocol, com viewport real e espera de hidratação.
+Auditoria no Microsoft Edge headless pelo Chrome DevTools Protocol, com viewport real e espera de hidratação.
 
 | Cenário        |    Viewport | `clientWidth` | `scrollWidth` | Resultado               |
 | -------------- | ----------: | ------------: | ------------: | ----------------------- |
-| Home clara     |   390 × 844 |           390 |           390 | sem overflow horizontal |
 | Home escura    |   390 × 844 |           390 |           390 | sem overflow horizontal |
-| Home clara     | 1440 × 1000 |          1425 |          1425 | sem overflow horizontal |
-| Home escura    | 1440 × 1000 |          1425 |          1425 | sem overflow horizontal |
-| Case Evoluteam |   390 × 844 |           390 |           390 | sem overflow horizontal |
-| Case Ceremony  | 1440 × 1000 |          1425 |          1425 | sem overflow horizontal |
+| Home escura    | 1440 × 1000 |          1440 |          1440 | sem overflow horizontal |
+| Home clara     | 1440 × 1000 |          1440 |          1440 | sem overflow horizontal |
+| Case Evoluteam | 1440 × 1000 |          1440 |          1440 | sem overflow horizontal |
 
-O toggle mudou a classe do documento de `dark` para `light` e persistiu `light` no armazenamento local. O disclosure "Como foi construído" iniciou fechado e respondeu à ativação, mudando seu estado para aberto.
+O toggle de tema mudou a classe do documento de `dark` para `light` e persistiu `light` no armazenamento local.
+
+## Imagens
+
+Nenhuma imagem é cortada. As molduras dos cards da home têm proporção fixa, para manter a grade regular, e a captura aparece inteira dentro delas por `object-contain`. Nas páginas de case a moldura assume a proporção natural do arquivo, sem faixa vazia. O zoom de 5% no hover foi removido, porque recortava a imagem justamente no estado em que o visitante está olhando para ela.
+
+| Imagem         |     Natural | Render no case | Render no card |
+| -------------- | ----------: | -------------: | -------------: |
+| ceremony-capa  |  1351 × 601 |              — |      730 × 401 |
+| silcon-capa    |  1352 × 603 |              — |      340 × 204 |
+| evoluteam-capa |  1262 × 908 |      730 × 525 |      340 × 204 |
+| hero (retrato) | 1254 × 1254 |              — |      112 × 112 |
 
 ## Movimento reduzido
 
-Com `prefers-reduced-motion: reduce`:
-
-- reveal: opacidade 1 e transform `none`;
-- marquee: `animation-name: none` e rolagem manual;
-- cópia duplicada da marquee: escondida;
-- hover de mídia: sem escala.
-
-Com movimento normal, o hero terminou em opacidade 1 e transform `none`; a marquee manteve `animation-name: marquee-slide`.
-
-## Desempenho local
-
-Medição mobile pelas APIs `PerformanceObserver`, usando o servidor de produção local:
-
-| Métrica            | Resultado |        Meta |
-| ------------------ | --------: | ----------: |
-| LCP                |    232 ms |     < 2,5 s |
-| CLS                |         0 |       < 0,1 |
-| `DOMContentLoaded` |     21 ms | informativo |
-| `load`             |    159 ms | informativo |
-
-Esses números validam a construção atual, mas não substituem o Lighthouse no domínio público com as capturas reais. Essa checagem está registrada nas pendências manuais.
+Com `prefers-reduced-motion: reduce`: `animation-name` da marquee em `none`, cópia duplicada com `display: none` e reveal em opacidade 1.
 
 ## Conteúdo e ativos
 
 - Nenhuma métrica, depoimento ou informação sobre Marcio foi inventada.
-- Os textos vêm do protótipo v12, do currículo e de `cases-para-revisao.md`.
-- Os nove slots de projeto e o retrato estão marcados explicitamente como pendentes.
-- Quatorze SVGs do Simple Icons estão vendorizados e renderizados como máscara monocromática.
+- Os nove alt texts descrevem a tela que cada captura realmente mostra, conferidos imagem a imagem.
+- Quatorze SVGs do Simple Icons vendorizados, renderizados como máscara monocromática a 22px no carrossel.
 - Playwright aparece apenas em texto, sem ícone inexistente.
 - Não há links `#`, Lorem Ipsum ou telas falsas construídas com `div`.
+- Pendência aberta em `pendencias-manuais.md`: a captura `silcon-apoio-2.png` exibe nomes de colaboradores reais.
+
+## Não medido aqui
+
+Lighthouse no domínio público em modo mobile e a prévia Open Graph nos aplicativos de mensagem. Ambos exigem o endereço real e estão registrados como pendência.

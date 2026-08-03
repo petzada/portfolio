@@ -7,21 +7,22 @@ import silconCapa from "./img/silcon-capa.png";
 export const silcon = {
   slug: "silcon",
   nome: "Silcon Estoque",
-  frase: "O almoxarifado sabe o que está acabando antes de faltar na linha.",
+  frase:
+    "Sistema de gestão de estoque interno para o almoxarifado da Silcon Ambiental.",
   status: "em-uso",
   stack: ["Next.js", "TypeScript", "PostgreSQL"],
   capa: {
     src: silconCapa,
-    alt: "Dashboard do Silcon Estoque",
+    alt: "Dashboard do Silcon Estoque com consumo, compras e movimentações do período",
   },
   apoio: [
     {
       src: silconApoio1,
-      alt: "Fila de reposição do Silcon Estoque",
+      alt: "Fila de reposição do Silcon Estoque, com os materiais abaixo do estoque mínimo",
     },
     {
       src: silconApoio2,
-      alt: "Histórico de movimentações do Silcon Estoque",
+      alt: "Histórico de movimentações do Silcon Estoque, com entradas e saídas de material",
     },
   ],
   oQueE: `Sistema de gestão do estoque de materiais internos da Silcon Ambiental, empresa de gestão de resíduos hospitalares. Controla catálogo de produtos, movimentações, pedidos de compra e o vestiário dos colaboradores.

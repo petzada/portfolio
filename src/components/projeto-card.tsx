@@ -25,11 +25,11 @@ export function ProjetoCard({
       href={`/projetos/${projeto.slug}`}
     >
       <div
-        className={`relative overflow-hidden rounded-media border border-line bg-surface transition-[border-color,box-shadow] duration-300 ease-[var(--ease-portfolio)] group-hover:border-line-strong group-hover:shadow-[0_8px_30px_rgb(0_0_0/0.10)] dark:group-hover:shadow-[0_8px_30px_rgb(0_0_0/0.55)] ${destaque ? "aspect-video" : "aspect-[16/10]"}`}
+        className={`overflow-hidden rounded-media border border-line bg-surface p-2 transition-[border-color,box-shadow] duration-300 ease-[var(--ease-portfolio)] group-hover:border-line-strong group-hover:shadow-[0_8px_30px_rgb(0_0_0/0.10)] sm:p-2.5 dark:group-hover:shadow-[0_8px_30px_rgb(0_0_0/0.55)] ${destaque ? "aspect-video" : "aspect-[16/10]"}`}
       >
         <CapturaSlot
           captura={projeto.capa}
-          dimensoes={destaque ? "1920 × 1080, 16:9" : "1600 × 1000, 16:10"}
+          className="h-full w-full object-contain"
           priority={destaque}
           sizes={
             destaque

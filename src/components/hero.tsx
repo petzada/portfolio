@@ -1,7 +1,9 @@
+import Image from "next/image";
+
+import retrato from "@/content/hero.png";
 import { perfil } from "@/content/perfil";
 
 import { Reveal } from "./reveal";
-import { TemaToggle } from "./tema-toggle";
 
 const tecnologias = "Next.js, TypeScript, Node e PostgreSQL";
 
@@ -10,19 +12,19 @@ export function Hero() {
 
   return (
     <>
-      <div className="mx-auto flex max-w-[800px] justify-end px-5 pt-5 sm:px-6">
-        <TemaToggle />
-      </div>
       <Reveal
-        className="mx-auto max-w-[800px] px-5 pt-8 sm:px-6 sm:pt-10"
+        className="mx-auto max-w-[800px] px-5 pt-16 sm:px-6 sm:pt-20"
         distance={16}
       >
         <section aria-labelledby="nome-marcio">
-          <div className="mb-7 grid size-[88px] place-content-center rounded-full border border-line-strong bg-surface text-center text-[11px] leading-[1.3] text-subtle sm:size-28">
-            Retrato
-            <br />
-            pendente
-          </div>
+          <Image
+            alt={`Retrato ilustrado de ${perfil.nome}`}
+            className="mb-7 size-[88px] rounded-full border border-line object-cover sm:size-28"
+            placeholder="blur"
+            priority
+            sizes="(max-width: 640px) 88px, 112px"
+            src={retrato}
+          />
           <h1
             className="font-display text-[30px] leading-[1.06] font-bold tracking-[-0.005em] sm:text-[44px]"
             id="nome-marcio"
@@ -77,13 +79,6 @@ export function Hero() {
               target="_blank"
             >
               GitHub
-            </a>
-            <a
-              className="rounded-full border border-line-strong bg-surface px-4 py-[9px] text-[13px] font-semibold whitespace-nowrap text-ink transition-colors hover:border-ink active:translate-y-px"
-              download
-              href={perfil.links.curriculo}
-            >
-              Baixar CV
             </a>
           </nav>
         </section>

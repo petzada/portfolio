@@ -27,7 +27,7 @@ export interface Emprego {
   cargo: string;
   periodo: string;
   atual: boolean;
-  descricao: string;
+  descricao: string[];
 }
 
 export interface Formacao {

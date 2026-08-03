@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import { CapturaSlot } from "@/components/captura-slot";
 import { Cta } from "@/components/cta";
 import { Reveal } from "@/components/reveal";
-import { TemaToggle } from "@/components/tema-toggle";
 import { buscarProjeto, projetos } from "@/content/projetos";
 import type { Status } from "@/lib/types";
 
@@ -73,7 +72,7 @@ export default async function ProjetoPage({ params }: ProjetoPageProps) {
   return (
     <main className="mx-auto max-w-[800px] px-5 pb-24 sm:px-6 sm:pb-28">
       <nav
-        className="flex items-center justify-between pt-5"
+        className="flex items-center pt-16 sm:pt-20"
         aria-label="Navegação do case"
       >
         <Link
@@ -82,7 +81,6 @@ export default async function ProjetoPage({ params }: ProjetoPageProps) {
         >
           Voltar
         </Link>
-        <TemaToggle />
       </nav>
 
       <Reveal className="pt-7" distance={16}>
@@ -117,10 +115,10 @@ export default async function ProjetoPage({ params }: ProjetoPageProps) {
       </Reveal>
 
       <Reveal className="mt-9">
-        <figure className="relative aspect-video overflow-hidden rounded-media border border-line bg-surface">
+        <figure className="overflow-hidden rounded-media border border-line bg-surface p-2 sm:p-2.5">
           <CapturaSlot
             captura={projeto.capa}
-            dimensoes="1920 × 1080, 16:9"
+            className="h-auto w-full rounded-[6px]"
             priority
             sizes="(max-width: 800px) 100vw, 752px"
           />
@@ -143,10 +141,10 @@ export default async function ProjetoPage({ params }: ProjetoPageProps) {
         </Reveal>
 
         <Reveal>
-          <figure className="relative aspect-video overflow-hidden rounded-media border border-line bg-surface">
+          <figure className="overflow-hidden rounded-media border border-line bg-surface p-2 sm:p-2.5">
             <CapturaSlot
               captura={projeto.apoio[0]}
-              dimensoes="1920 × 1080, 16:9"
+              className="h-auto w-full rounded-[6px]"
               sizes="(max-width: 800px) 100vw, 752px"
             />
           </figure>
@@ -167,10 +165,10 @@ export default async function ProjetoPage({ params }: ProjetoPageProps) {
         </Reveal>
 
         <Reveal>
-          <figure className="relative aspect-video overflow-hidden rounded-media border border-line bg-surface">
+          <figure className="overflow-hidden rounded-media border border-line bg-surface p-2 sm:p-2.5">
             <CapturaSlot
               captura={projeto.apoio[1]}
-              dimensoes="1920 × 1080, 16:9"
+              className="h-auto w-full rounded-[6px]"
               sizes="(max-width: 800px) 100vw, 752px"
             />
           </figure>
