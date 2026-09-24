@@ -1,4 +1,4 @@
-import { formacao, idiomas } from "@/content/formacao";
+import { formacao, formacaoComplementar, idiomas } from "@/content/formacao";
 
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
@@ -22,6 +22,15 @@ export function Formacao() {
           {curso.detalhe ? (
             <p className="copy mt-3 text-sm text-muted">{curso.detalhe}</p>
           ) : null}
+          <h3 className="mt-7 text-[17px] font-semibold tracking-[-0.02em]">
+            Formação complementar
+          </h3>
+          {formacaoComplementar.map((item) => (
+            <p className="mt-1.5 text-sm text-muted" key={item.curso}>
+              {item.curso} · {item.instituicao}
+              <span className="text-subtle"> · {item.periodo}</span>
+            </p>
+          ))}
         </div>
         <div>
           <h3 className="text-[17px] font-semibold tracking-[-0.02em]">

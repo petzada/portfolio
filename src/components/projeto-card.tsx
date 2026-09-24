@@ -7,7 +7,7 @@ import { CapturaSlot } from "./captura-slot";
 const statusLabel: Record<Status, string> = {
   "no-ar": "no ar",
   "em-uso": "em uso",
-  demo: "demo",
+  "em-testes": "em testes",
 };
 
 export function ProjetoCard({
@@ -17,7 +17,7 @@ export function ProjetoCard({
   projeto: Projeto;
   destaque: boolean;
 }) {
-  const statusAtivo = projeto.status !== "demo";
+  const statusAtivo = projeto.status !== "em-testes";
 
   return (
     <Link

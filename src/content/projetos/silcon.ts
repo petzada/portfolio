@@ -8,7 +8,7 @@ export const silcon = {
   slug: "silcon",
   nome: "Silcon Estoque",
   frase:
-    "Sistema de gestão de estoque interno para o almoxarifado da Silcon Ambiental.",
+    "Sistema de estoque que substituiu as planilhas do almoxarifado onde trabalho e está em uso diário na operação.",
   status: "em-uso",
   stack: ["Next.js", "TypeScript", "PostgreSQL"],
   capa: {
@@ -25,23 +25,21 @@ export const silcon = {
       alt: "Histórico de movimentações do Silcon Estoque, com entradas e saídas de material",
     },
   ],
-  oQueE: `Sistema de gestão do estoque de materiais internos da Silcon Ambiental, empresa de gestão de resíduos hospitalares. Controla catálogo de produtos, movimentações, pedidos de compra e o vestiário dos colaboradores.
+  oQueE: `Sistema de gestão do almoxarifado da Silcon Ambiental, empresa de gestão de resíduos hospitalares. Controla o material que a operação consome: EPIs, uniformes, produtos de copa e limpeza.
 
-Está em uso na operação, com as pessoas do almoxarifado usando todo dia.`,
-  comoFunciona: `Cada produto tem estoque mínimo e máximo, e o saldo o classifica em uma de três faixas: estável, crítico quando cai abaixo do mínimo, ou zerado. Produtos críticos e zerados entram numa fila de reposição ordenada por urgência.
+O problema era meu antes de ser do software. Quando assumi o almoxarifado, o controle vivia em planilhas de Excel, e três perguntas não tinham resposta: o que está acabando, quanto cada setor gastou no mês e se o fornecedor subiu o preço. Construí o sistema para responder as três em segundos.`,
+  comoFunciona: `O dashboard tem duas abas. Operação mostra o que pede atenção hoje: itens zerados e críticos, pedidos em atraso e a cobertura em dias, que usa o consumo dos últimos 90 dias para dizer quanto tempo o saldo ainda dura. É o número que antecipa a falta em vez de anunciá-la. Análise compara consumo e compras em reais com o período anterior, por categoria, setor e produto.
 
-A partir dessa fila o sistema gera dois tipos de pedido de compra: o emergencial, para o que zerou, e o de reposição mensal, que repõe cada item até o estoque máximo. Os dois saem em PDF, prontos para enviar ao fornecedor.
+Cada saída é lançada com o colaborador que retirou o material e herda o setor dele. É isso que permite perguntar quanto a Produção gastou de EPI.
 
-Entradas e saídas são registradas com nota fiscal e com o setor que solicitou. O sistema guarda o histórico de preço de cada produto e compara o valor pago com o custo cadastrado, avisando quando o preço sobe quinze por cento ou mais. É o alerta que evita pagar reajuste sem perceber.
+A compra passa por quatro etapas: a fila de reposição, ordenada por urgência; a sugestão de compra, emergencial ou mensal, sempre repondo até o estoque máximo; o acompanhamento de cada pedido até o recebimento; e a variação de preço entre compras, que avisa quando um item sobe acima de um limite ajustável.
 
-O dashboard mostra entradas e saídas em reais, itens críticos, estoque zerado, gasto por setor e os produtos mais consumidos, com filtro por mês, ano e setor.
+Um módulo à parte cuida do vestiário: armários de uniforme e de vestiário, com no máximo um ocupante por armário.`,
+  comoFoiConstruido: `A regra de negócio mora no banco. O saldo é atualizado por gatilhos no PostgreSQL, e os indicadores do dashboard são funções SQL. Nenhuma movimentação deixa o estoque inconsistente, venha da tela, de uma importação ou de uma correção.
 
-Um módulo à parte cuida do vestiário: armários numerados, de uniforme ou de vestiário, com no máximo um ocupante por armário.`,
-  comoFoiConstruido: `Aplicação Next.js 16 com App Router, React 19 e TypeScript, estilizada com Tailwind CSS. Servidor em Node.js.
+O custo de um produto só muda com entrada que tem nota fiscal e valor unitário. É decisão de projeto: sem isso, o histórico de preços vira ruído. Essa e as outras decisões estruturais estão documentadas com o motivo, junto de um glossário que fixa o vocabulário do domínio.
 
-O banco é PostgreSQL, e a decisão central do projeto está nele: a atualização de saldo não vive na aplicação, e sim em gatilhos e funções SQL disparados pela própria movimentação. Isso garante que nenhuma entrada ou saída consiga deixar o estoque inconsistente, venha ela da interface, de uma importação em massa ou de uma correção manual. O controle de acesso também é aplicado no banco, por Row Level Security.
+Login individual, com acesso ao banco liberado apenas para sessão autenticada.
 
-A modelagem cobre produtos, categorias, setores, colaboradores, movimentações e ocupação de armários, com integridade referencial e exclusão em cascata. Validação de entrada com schema tipado, importação de catálogo por CSV e geração de relatórios em PDF no cliente.
-
-Stack: Next.js, React, TypeScript, Node.js, PostgreSQL, SQL, triggers e functions, APIs REST, Tailwind CSS e Git.`,
+Stack: Next.js, React, TypeScript, PostgreSQL, Supabase, SQL, Tailwind CSS e Git.`,
 } satisfies Projeto;

@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { CapturaSlot } from "@/components/captura-slot";
 import { Cta } from "@/components/cta";
 import { Reveal } from "@/components/reveal";
+import { perfil } from "@/content/perfil";
 import { buscarProjeto, projetos } from "@/content/projetos";
 import type { Status } from "@/lib/types";
 
@@ -13,7 +14,7 @@ export const dynamicParams = false;
 const statusLabel: Record<Status, string> = {
   "no-ar": "no ar",
   "em-uso": "em uso",
-  demo: "demo",
+  "em-testes": "em testes",
 };
 
 interface ProjetoPageProps {
@@ -95,7 +96,7 @@ export default async function ProjetoPage({ params }: ProjetoPageProps) {
             <span className="inline-flex items-center gap-1.5">
               <span
                 aria-hidden="true"
-                className={`size-1.5 rounded-full ${projeto.status === "demo" ? "border border-subtle" : "bg-muted"}`}
+                className={`size-1.5 rounded-full ${projeto.status === "em-testes" ? "border border-subtle" : "bg-muted"}`}
               />
               {statusLabel[projeto.status]}
             </span>
@@ -197,7 +198,12 @@ export default async function ProjetoPage({ params }: ProjetoPageProps) {
             Ver no ar
           </a>
         ) : null}
-        <Cta />
+        <Cta
+          acao="Falar comigo"
+          href={perfil.links.email}
+          texto="Estou aberto a novas oportunidades e também atendo projetos sob demanda."
+          titulo="Procurando um Product Software Engineer?"
+        />
       </Reveal>
     </main>
   );

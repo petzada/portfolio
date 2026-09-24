@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: `%s | ${perfil.nome}`,
   },
   description:
-    "Construo aplicações web completas, do banco de dados ao deploy, com Next.js, TypeScript, Node e PostgreSQL.",
+    "Construo produtos de software do problema ao deploy. Fundador do Ceremony, SaaS de sites de casamento com mais de 200 casais nos dois primeiros meses.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -37,14 +37,14 @@ export const metadata: Metadata = {
     siteName: perfil.nome,
     title: `${perfil.nome} | ${perfil.cargo}`,
     description:
-      "Construo aplicações web completas, do banco de dados ao deploy, com Next.js, TypeScript, Node e PostgreSQL.",
+      "Construo produtos de software do problema ao deploy. Fundador do Ceremony, SaaS de sites de casamento com mais de 200 casais nos dois primeiros meses.",
     url: "/",
   },
   twitter: {
     card: "summary_large_image",
     title: `${perfil.nome} | ${perfil.cargo}`,
     description:
-      "Construo aplicações web completas, do banco de dados ao deploy, com Next.js, TypeScript, Node e PostgreSQL.",
+      "Construo produtos de software do problema ao deploy. Fundador do Ceremony, SaaS de sites de casamento com mais de 200 casais nos dois primeiros meses.",
   },
 };
 

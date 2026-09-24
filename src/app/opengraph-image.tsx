@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Marcio Petigrosso, Desenvolvedor full stack";
+export const alt = "Marcio Petigrosso, Product Software Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -42,7 +42,7 @@ export default function OpenGraphImage() {
           marginTop: 34,
         }}
       >
-        Desenvolvedor full stack
+        Product Software Engineer
       </div>
     </div>,
     size,

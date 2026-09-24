@@ -5,10 +5,10 @@ import { perfil } from "@/content/perfil";
 
 import { Reveal } from "./reveal";
 
-const tecnologias = "Next.js, TypeScript, Node e PostgreSQL";
+const destaque = "mais de 200 casais nos dois primeiros meses, sem mídia paga";
 
 export function Hero() {
-  const [antes, depois] = perfil.apresentacao.split(tecnologias);
+  const [antes, depois] = perfil.apresentacao.split(destaque);
 
   return (
     <>
@@ -49,7 +49,7 @@ export function Hero() {
           </div>
           <p className="copy mt-[26px] text-[17px] leading-[1.65] text-muted sm:text-lg">
             {antes}
-            <strong className="font-semibold text-ink">{tecnologias}</strong>
+            <strong className="font-semibold text-ink">{destaque}</strong>
             {depois}
           </p>
           <nav
@@ -58,11 +58,9 @@ export function Hero() {
           >
             <a
               className="rounded-full border border-ink bg-ink px-4 py-[9px] text-[13px] font-semibold whitespace-nowrap text-canvas transition-opacity hover:opacity-85 active:translate-y-px"
-              href={perfil.links.whatsapp}
-              rel="noopener noreferrer"
-              target="_blank"
+              href={perfil.links.email}
             >
-              Pedir um orçamento
+              Falar comigo
             </a>
             <a
               className="rounded-full border border-line-strong bg-surface px-4 py-[9px] text-[13px] font-semibold whitespace-nowrap text-ink transition-colors hover:border-ink active:translate-y-px"

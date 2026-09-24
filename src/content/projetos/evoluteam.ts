@@ -8,8 +8,8 @@ export const evoluteam = {
   slug: "evoluteam",
   nome: "Evoluteam",
   frase:
-    "Plataforma de apoio a RH: avaliação de desempenho e PDI, fora da planilha compartilhada.",
-  status: "demo",
+    "Plataforma de gestão de desempenho para uma consultoria que acompanhava a evolução dos funcionários em planilha.",
+  status: "em-testes",
   stack: ["Next.js", "TypeScript", "PostgreSQL"],
   capa: {
     src: evoluteamCapa,
@@ -25,16 +25,16 @@ export const evoluteam = {
       alt: "Relatórios de recrutamento do Evoluteam com funil de conversão e tempo por etapa",
     },
   ],
-  oQueE: `Aplicação web de gestão de pessoas para empresas que ainda fazem avaliação de desempenho no manual, com formulário solto e planilha compartilhada.
+  oQueE: `Reúne num lugar só a estrutura da empresa, os ciclos de avaliação, o feedback contínuo, os planos de desenvolvimento individual (PDI) e o recrutamento, que antes viviam em formulários soltos e planilhas compartilhadas.
 
-Reúne num lugar só a estrutura da empresa, os ciclos de avaliação, o feedback contínuo, os planos de desenvolvimento individual e o acompanhamento de indicadores.`,
+Usei o Qulture Rocks, referência em gestão de desempenho, como base de pesquisa de produto. O sistema está em fase de testes, ainda sem usuários reais, com arquitetura pensada para atender várias empresas ao mesmo tempo.`,
   comoFunciona: `A empresa cadastra unidades, departamentos, cargos e competências, e a partir daí registra os colaboradores, cada um com gestor responsável e nível. A entrada de uma pessoa no sistema acontece por convite enviado no e-mail dela.
 
 O acesso é dividido em quatro perfis. RH enxerga tudo e configura a empresa. O gestor enxerga seus liderados. O colaborador enxerga apenas o próprio histórico. A diretoria vê os dashboards consolidados sem operar o sistema.
 
 O RH abre um ciclo de avaliação. Dentro dele, cada colaborador responde a autoavaliação enquanto o gestor responde a dele, e o resultado individual nasce da comparação entre as duas leituras. Fora dos ciclos, gestores registram feedback a qualquer momento, o que impede que o único registro sobre uma pessoa seja o da avaliação anual.
 
-O que sai da avaliação vira um plano de desenvolvimento individual, com ações e acompanhamento. Há ainda um módulo de recrutamento, com vagas, candidatos, etapas de processo e relatórios.`,
+O que sai da avaliação vira um PDI, com ações e acompanhamento. Cada ação tem um responsável, que pode ser o próprio gestor, como numa conversa 1:1 quinzenal. Há ainda um módulo de recrutamento, com vagas, candidatos, etapas de processo e relatórios.`,
   comoFoiConstruido: `Aplicação Next.js 16 com App Router, React 19 com Server Components e Server Actions, TypeScript e Tailwind CSS. Servidor em Node.js.
 
 O banco é PostgreSQL com arquitetura multi-tenant: os dados de todas as empresas convivem no mesmo banco, isolados por Row Level Security. É o requisito que define um sistema assim, porque nenhuma consulta pode atravessar de uma empresa para outra, por acidente ou por má-fé. Sobre esse isolamento roda um controle de permissão por papel, com quatro níveis de acesso.

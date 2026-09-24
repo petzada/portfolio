@@ -1,6 +1,6 @@
 import type { StaticImageData } from "next/image";
 
-export type Status = "no-ar" | "em-uso" | "demo";
+export type Status = "no-ar" | "em-uso" | "em-testes";
 
 export interface Captura {
   src: StaticImageData;
